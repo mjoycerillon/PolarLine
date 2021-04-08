@@ -1,0 +1,259 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: unset !important;
+}
+
+/* Common Styles */
+.responsiveImage {
+    width: 100%;
+    height: auto;
+}
+
+.floatLeft {
+    float: left;
+}
+
+.center-items {
+    display: flex;
+    justify-content: center;
+}
+
+.spacearound-items {
+    display: flex;
+    justify-content: space-around;
+}
+
+.align-justify-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.align-items-center {
+    display: flex;
+    align-items: center;
+}
+
+/* Styles for Mobile layout */
+.logo-polar {
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
+}
+
+.logo-line {
+    font-weight: lighter;
+    font-family: 'Playfair Display', serif;
+}
+
+#polarline-head {
+    top: 0;
+    display: flex;
+    background-color: black;
+    font-size: 35px;
+    padding: 0.5em;
+    letter-spacing: 3px;
+}
+
+#polarline-head a {
+    color: white;
+    text-decoration: none;
+    font-style: italic;
+}
+
+nav{
+    background-color: white;
+    color: black;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.filler {
+    width: 15%;
+}
+
+.nav-links-grp {
+    width: 70%;
+}
+
+.nav-links{
+    width: 40%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+    margin: auto;
+}
+
+.nav-links li {
+	display: block;
+    margin: 30px 0;
+}
+
+.nav-links li a{
+    text-decoration: none;
+    color: black;
+    font-size: large;
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.nav-links li a:before {    
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: black;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+.nav-links li a:hover:before { 
+    width: 100%; 
+    left: 0; 
+}
+
+.drop-menu{
+    position: absolute;
+    background-color: white;
+    top: 160px;
+    width: 100%;
+    display: none;
+    z-index: 100;
+    left: 0;
+    padding: 2em 0;
+    margin: auto;
+}
+
+.nav-account-d-menu {
+    top: 50px !important;
+    border: none !important;
+    left: -100px;
+}
+
+.nav-icons-grp {
+    list-style: none;
+    display: flex;
+    margin: 0;
+}
+
+.nav-icons-grp li a {
+    width: auto;
+}
+
+.sub-menu {
+    width: 25%;
+    float: left;
+    text-indent: 5em;
+}
+
+.inner-drop-menu {
+    padding: 0;
+}
+
+.inner-drop-menu li a{
+    font-size: small;
+}
+
+#nav-icons {
+    display: flex;
+    width: 15%;
+    align-items: center;
+    justify-content: center;
+}
+
+#nav-icons a {
+    padding: 10px;
+}
+
+/* Style for the body */
+body {
+    background-color: whitesmoke;
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    color: lightgray;
+    background-color: black;
+    width: 100%;
+}
+
+.footer-col-2 {
+    padding: 0.5em 0.5em 0.5em 7em !important;
+}
+
+#footer-logo {
+    color: white;
+    font-size: 50px;
+    letter-spacing: 3px;
+}
+
+#footer-about-us {
+    font-size: 15px;
+    letter-spacing: 1px;
+    padding-bottom: 2em;
+}
+
+#footer-find-us {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#footer-social-media img {
+    padding: 1.5em 1em 0 0;
+}
+
+.footer-col-header {
+    color: white;
+    padding: 1.25em 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#footer-voucher {
+    font-size: 20px;
+    padding-bottom: 2em;
+}
+
+.footer-form input {
+    background-color: white;
+    border: none;
+    height: 45px;
+    margin-bottom: 1em;
+    outline: none;
+    width: 300px;
+    padding-left: 10px;
+    font-size: medium;
+}
+
+.footer-form button {
+    background-color: black;
+    border: 2px solid white; /* Green */
+    color: white;
+    cursor: pointer;
+    height: 45px;
+    font-size: medium;
+    outline: none;
+    transition: all 0.5s ease-in-out;
+    width: 120px;
+}
+
+
+/* Style for the main */
+
+/* Media query for Tablet layout */
+@media only screen and (min-width: 620px) {
+
+    
+}
+
+/* Media query for desktop layout */
+@media only screen and (min-width: 1024px) {
+
+
+}
