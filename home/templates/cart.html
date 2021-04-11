@@ -1,5 +1,65 @@
 {% extends 'base.html' %}
 
 {% block content %}
-Cart Page
+{% load static %}
+    <main>
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-7 p-0">
+                    <div class="row p-4">
+                        <div class="col fw-bolder" style="font-size: 25px;">My Cart</div>
+                        <div class="col fw-bolder d-flex justify-content-end" style="font-size: 25px;">Items</div>
+                    </div>
+                    <div id="cartContainer" class="row pb-1 justify-content-center"></div>
+                </div>
+                <div class="col-5 p-0">
+                    <div class="row p-4 fw-bolder justify-content-center" style="font-size: 25px;">Cart Summary</div>
+                    <div class="row pb-4 justify-content-center">
+                        <div class="card p-3" style="width: 90%;">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col px-5">
+                                        <div class="row">Sub Total</div>
+                                        <div class="row">Tax</div>
+                                        <div class="row">Shipping</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row" id="txtCartSubTotal">0.00</div>
+                                        <div class="row">Calculated at checkout</div>
+                                        <div class="row">Calculated at checkout</div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row px-4">
+                                    <div class="col fw-bolder">Total</div>
+                                    <div class="col fw-bolder" id="txtCartTotal" style="
+                                    padding-left: 4em;">0.00</div>
+                                </div>
+                                <div class="row p-4">Please click the checkout button to continue.</div>
+                                <div class="row p-2">
+                                    <button type="button" style="width: 90%;" class="btn btn-dark btn-lg btn-block">Checkout</button>
+                                </div>
+                                <div class="row">
+                                    <div class="col d-flex justify-content-end">
+                                        <img class="img-fluid img-thumbnail" style="height: 50px; border:none;" src="{% static '/cart/images/visa-logo.png' %}" alt="">
+                                    </div>
+                                    <div class="col">
+                                        <img class="img-fluid img-thumbnail" style="height: 50px; border:none;" src="{% static '/cart/images/mastercard-logo.png' %}" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <button type="button" class="btn btn-outline-dark btn-lg btn-block" style="width: 80%; border-radius: 0;">Update Cart</button>
+                                    </div>
+                                    <div class="col">
+                                        <button type="button" class="btn btn-outline-dark btn-lg btn-block" style="border-radius: 0;">Continue Shopping</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 {% endblock %}
