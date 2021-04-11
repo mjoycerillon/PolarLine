@@ -1,0 +1,86 @@
+.banner-area {
+    z-index: 20;
+    padding-left: 5em !important;
+    width: auto !important;
+}
+
+.banner-text {
+    color: whitesmoke;
+    font-weight: 400;
+    font-size: 70px;
+}
+
+#btnHomeShopNow {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    height: 50px;
+    font-size: 30px;
+    outline: none;
+    width: 200px;
+    border: 0;
+}
+
+#btnHomeShopNow:active {
+    transform: translateY(1px);
+}
+
+.home-carousel-wrapper {
+    height: 100vh;
+}
+
+#slider-area {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+}
+
+#slider-area .owl-item div {
+    height: 100vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#promotions {
+    padding-bottom: 2em;
+}
+
+.img-promo-home {
+    height: 500px;
+}
+
+.img-1{
+    background: url('../images/promo-img1.png') no-repeat center center;
+    background-size: cover;
+    z-index: 0;
+}
+.img-2{
+    background: url('../images/promo-img2.png') no-repeat center center;
+    background-size: cover;
+    z-index: 0;
+}
+.img-3{
+    background: url('../images/promo-img3.png') no-repeat center center;
+    background-size: cover;
+    z-index: 0;
+}
+.filter {
+    filter: grayscale(30%) blur(3px);
+    transform: scale(1.1);
+    transition: all .2s ease-out;
+}
+
+.home-promo-label {
+    z-index: 80;
+    position: absolute;
+    font-size: 60px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    line-height: 1em;
+
+}
+.home-promo-label1 {
+    letter-spacing: 3px;
+}

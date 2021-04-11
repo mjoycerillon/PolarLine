@@ -1,5 +1,47 @@
 {% extends 'base.html' %}
-
 {% block content %}
-Home page
+{% load static %}
+    <main>
+        <div class="row gx-0 vh-100">
+            <div class="banner-area d-flex justify-content-center flex-column">
+                <div class="banner-text">Warm at zero</div>
+                <button id="btnHomeShopNow">SHOP NOW</button>
+            </div>
+            <div id="slider-area" class="owl-carousel owl-theme">
+                <div style="background-image: url({% static '/home/images/banner-1.png' %})"></div>
+                <div style="background-image: url({% static '/home/images/banner-2.png' %})"></div>
+                <div style="background-image: url({% static '/home/images/banner-3.png' %})"></div>
+            </div>
+        </div>
+        <section id="promotions">
+            <div class="row m-5">
+                <div class="col-md-12 p-0">
+                    <div class="row m-3 img-promo-home">
+                        <div class="col-md-7 p-0">
+                            <div class="m-2 overflow-hidden d-flex align-items-center justify-content-center" style="height: 100%;">
+                                <div class="home-promo-label home-promo-label1 text-white">TRENDING NOW</div>
+                                <div class="promo-image img-1 w-100 h-100"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 p-0">
+                            <div class="m-2 overflow-hidden" style="height: 100%;">
+                                <div class="home-promo-label p-3 text-white">
+                                    UPTO<br><span style="font-size: 85px;">50%</span><br>OFF
+                                </div>
+                                <div class="promo-image img-2 w-100 h-100"></div>
+                            </div>
+                        </div>
+                    </div>
+					<div class="row m-3 img-promo-home">
+						<div class="col-md-12 p-0">
+                            <div class="m-2 overflow-hidden d-flex align-items-center justify-content-center" style="height: 100%;">
+                                <div class="home-promo-label home-promo-label3 text-white">WINTER COLLECTION 2021</div>
+                                <div class="promo-image img-3 w-100 h-100"></div>
+                            </div>
+                        </div>
+					</div>
+                </div>
+            </div>
+        </section>
+    </main>
 {% endblock %}

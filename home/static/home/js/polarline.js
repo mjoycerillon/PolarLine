@@ -7,9 +7,15 @@ $(function() {
 
     // Call the Window On Load Function
     $(window).on('load', function () {
+
+        isLoggedOn = localStorage.getItem("isLoggedOn");
+        accounts = localStorage.getItem("accounts");
+        userData = localStorage.getItem("current_user");
+        user = JSON.parse(userData);
+
         // Validate if dummy data exists on the local storage
         if (accounts == null) {
-            var accounts = 
+            var accounts =
             [{
                 "first_name": "Rachel Karen",
                 "last_name": "Green",
@@ -18,12 +24,24 @@ $(function() {
                 "billing_address": "1457 London Rd, Sarnia, Ontario Canada, N7S 6K4",
                 "shipping_address": "1457 London Rd, Sarnia, Ontario Canada, N7S 6K4",
                 "birth_date": "09/22/1994",
-                "cart": []
-
+                "cart": [
+                    {
+                        "product": "Z Sweater Coat (White)",
+                        "quantity": "2",
+                        "price": "94.99",
+                        "imageLocation": "./images/shop/shop-image-1.jpg"
+                    },
+                    {
+                        "product": "Au Revoir Sweater (White)",
+                        "quantity": "1",
+                        "price": "54.99",
+                        "imageLocation": "./images/shop/shop-image-2.jpg"
+                    },
+                    ]
             }];
             var accountsJSON = JSON.stringify(accounts);
             localStorage.setItem("accounts", accountsJSON);
-        } 
+        }
 
         if (isLoggedOn == "true") {
             $("#navAccountName").text(user["first_name"]);
@@ -58,8 +76,7 @@ $(function() {
         localStorage.setItem("isLoggedOn", "false");
         localStorage.removeItem("current_user");
         $('#navSignOutLink').remove(); // when referencing by id
-    }); 
-
+    });
 
     /**
      * Login
@@ -88,7 +105,6 @@ $(function() {
         // Validate if the email match on the current data
         if (emailFound == false) {
             alert("Account does not exist!");
-            console.log("Account does not exist!")
             $("#loginForm").trigger("reset");
             $('#txtLoginEmail').focus();
             event.preventDefault();
@@ -107,9 +123,36 @@ $(function() {
                 event.preventDefault();
 
             } else {
-                // Set the global variable isLoggedOn to true and redirect to Account Page            
+                // Set the global variable isLoggedOn to true and redirect to Account Page
                 localStorage.setItem("isLoggedOn", true);
             }
         }
     });
+
+    /**
+     * Register Button
+     */
+        $('#registerForm').on('submit', function(event) {
+        accounts=localStorage.getItem("accounts");
+        var accountsObj=JSON.parse(accounts);
+        accountsObj=JSON.parse(accounts);
+        accountsObj.push(
+            {
+                "first_name": $('#txtRegisterFirstName').val(),
+                "last_name": $('#txtRegisterLastName').val(),
+                "email": $('#txtRegisterEmail').val(),
+                "password": $('#txtRegisterPassword').val(),
+                "billing_address": "",
+                "shipping_address": "",
+                "birth_date": "",
+                "cart": []
+            }
+        );
+        accounts=JSON.stringify(accountsObj);
+        localStorage.setItem("accounts",accounts);
+
+        $('#exampleModalCenter').modal('show')
+
+    });
+
 });
