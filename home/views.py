@@ -1,9 +1,8 @@
-from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
-
 
 # Create your views here.
 from home.forms import UserForm
@@ -22,7 +21,16 @@ def contactus(request):
 
 
 def loginuser(request):
-    return render(request, 'login.html')
+    if request.method == 'POST':
+        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+        if user is None:
+            return render(request, 'login.html', {'form': AuthenticationForm(),
+                                                  'error': 'Username and password did not match'})
+        else:
+            login(request, user)
+            return redirect('home')
+    else:
+        return render(request, 'login.html', {'form': AuthenticationForm()})
 
 
 def cart(request):
@@ -30,9 +38,7 @@ def cart(request):
 
 
 def signupuser(request):
-    if request.method == 'GET':
-        return render(request, 'signup.html', {'form': UserForm()})
-    else:
+    if request.method == 'POST':
         # Create a new user
         if request.POST['password1'] == request.POST['password2']:
             try:
@@ -50,4 +56,6 @@ def signupuser(request):
         else:
             # Password didn't match
             return render(request, 'signup.html', {'form': UserForm(), 'error': 'Passwords did not match'})
+    else:
+        return render(request, 'signup.html', {'form': UserForm()})
 
