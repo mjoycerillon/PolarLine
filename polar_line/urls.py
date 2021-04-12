@@ -23,12 +23,17 @@ from home import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
-    path('shop/', views.shop, name='shop'),
-    path('contactus/', views.contactus, name='contactus'),
-    path('login/', views.login, name='login'),
-    path('cart/', views.cart, name='cart'),
 
+    # Authentication
+    path('login/', views.loginuser, name='loginuser'),
+    path('signup/', views.signupuser, name='signupuser'),
+
+    # Polar Line Pages
+    path('shop/', views.shop, name='shop'),
+    path('cart/', views.cart, name='cart'),
+    path('contactus/', views.contactus, name='contactus'),
 ]
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
