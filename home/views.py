@@ -2,10 +2,11 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
 from home.forms import UserForm
+from home.models import Cart
 
 
 def home(request):
@@ -34,7 +35,11 @@ def loginuser(request):
 
 
 def cart(request):
-    return render(request, 'cart.html')
+    if request.method == 'POST':
+        pass
+    else:
+        usercart = Cart.objects.filter(user=request.user).order_by('-created')
+        return render(request, 'cart.html', {'usercart': usercart})
 
 
 def signupuser(request):

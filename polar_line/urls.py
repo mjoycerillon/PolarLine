@@ -31,6 +31,7 @@ urlpatterns = [
     # Polar Line Pages
     path('shop/', views.shop, name='shop'),
     path('cart/', views.cart, name='cart'),
+
     path('contactus/', views.contactus, name='contactus'),
 ]
 
