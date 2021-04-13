@@ -44,11 +44,27 @@ def cart(request):
         return render(request, 'cart.html', {'form': CartForm(), 'cart': cart})
 
 
-@login_required
 def remove_item(request, cart_id):
     cart_item = get_object_or_404(Cart, id=cart_id)
     if request.method == 'POST':
         cart_item.delete()
+        return redirect('cart')
+
+
+def increment_item(request, cart_id):
+    cart_item = get_object_or_404(Cart, id=cart_id)
+    if request.method == 'POST':
+        cart_item.quantity += 1
+        cart_item.save()
+        return redirect('cart')
+
+
+def decrement_item(request, cart_id):
+    cart_item = get_object_or_404(Cart, id=cart_id)
+    if request.method == 'POST':
+        if cart_item.quantity > 0:
+            cart_item.quantity -= 1
+            cart_item.save()
         return redirect('cart')
 
 
