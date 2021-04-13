@@ -11,16 +11,6 @@ $(function() {
         $(this).toggleClass("filter");
     });
 
-    // Upon clicking the button Shop Now, the page will redirect to Shop Page
-    $('#btnHomeShopNow').click(function(){
-        window.location = "shop"
-    });
-
-    // Upon clicking the button Shop Now, the page will redirect to Shop Page
-    $('.promo-image').click(function(){
-        window.location = "shop"
-    });
-
     // Calling the plugin Owl Carousel
     $('.owl-carousel').owlCarousel({
         stagePadding: 0,
