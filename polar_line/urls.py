@@ -26,12 +26,12 @@ urlpatterns = [
 
     # Authentication
     path('login/', views.loginuser, name='loginuser'),
-    path('signup/', views.signupuser, name='signupuser'),
+    path('signup/', views.signup_user, name='signup_user'),
 
     # Polar Line Pages
     path('shop/', views.shop, name='shop'),
     path('cart/', views.cart, name='cart'),
-
+    path('cart/<int:cart_id>/remove', views.remove_item, name='remove_item'),
     path('contactus/', views.contactus, name='contactus'),
 ]
 

@@ -1,12 +1,13 @@
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 
 # Create your views here.
-from home.forms import UserForm
-from home.models import Cart
+from home.forms import UserForm, CartForm
+from home.models import Cart, Product
 
 
 def home(request):
@@ -23,10 +24,13 @@ def contactus(request):
 
 def loginuser(request):
     if request.method == 'POST':
-        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+        user = authenticate(request, username=request.POST['username']
+                            , password=request.POST['password'])
         if user is None:
-            return render(request, 'login.html', {'form': AuthenticationForm(),
-                                                  'error': 'Username and password did not match'})
+            return render(request,
+                          'login.html',
+                          {'form': AuthenticationForm(),
+                           'error': 'Username and password did not match'})
         else:
             login(request, user)
             return redirect('home')
@@ -35,14 +39,20 @@ def loginuser(request):
 
 
 def cart(request):
+    cart = Cart.objects.filter(user=request.user)
+    if request.method == 'GET':
+        return render(request, 'cart.html', {'form': CartForm(), 'cart': cart})
+
+
+@login_required
+def remove_item(request, cart_id):
+    cart_item = get_object_or_404(Cart, id=cart_id)
     if request.method == 'POST':
-        pass
-    else:
-        usercart = Cart.objects.filter(user=request.user).order_by('-created')
-        return render(request, 'cart.html', {'usercart': usercart})
+        cart_item.delete()
+        return redirect('cart')
 
 
-def signupuser(request):
+def signup_user(request):
     if request.method == 'POST':
         # Create a new user
         if request.POST['password1'] == request.POST['password2']:
