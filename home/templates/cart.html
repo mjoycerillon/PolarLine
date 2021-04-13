@@ -2,6 +2,7 @@
 
 {% block content %}
 {% load static %}
+{% load mathfilters %}
     <main>
         <div class="container py-4">
             <div class="row">
@@ -10,7 +11,59 @@
                         <div class="col fw-bolder" style="font-size: 25px;">My Cart</div>
                         <div class="col fw-bolder d-flex justify-content-end" style="font-size: 25px;">Items</div>
                     </div>
-                    <div id="cartContainer" class="row pb-1 justify-content-center"></div>
+                    <div id="cartContainer" class="row pb-1 justify-content-center">
+                        {% for item in usercart %}
+						<div class="row pb-1 justify-content-center cartItem">
+                              <div class="card mb-2" style="width: 90%;">
+                                  <div class="card-body">
+                                      <div class="row d-flex justify-content-end">
+                                          <button type="button" class="btn-close removeItem" aria-label="Close"></button>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col"><img src="{{ item.productId.productImage.url }}" class="img-fluid img-thumbnail"></div>
+                                          <div class="col align-items-center text-center fw-bolder">{{ item.productId.productName }}</div>
+                                          <div class="col align-items-center">
+                                              <div class="container">
+                                                  <div class="row justify-content-center">Price</div>
+                                                  <div class="row justify-content-center text-danger fw-bolder cartItemPrice">${{ item.productId.productPrice }}</div>
+                                              </div>
+                                          </div>
+                                          <div class="col align-items-center">
+                                              <div class="container p-0">
+                                                  <div class="row justify-content-center">Quantity</div>
+                                                  <div class="row justify-content-center">
+                                                      <div class="input-group justify-content-center text-center">
+                                                          <button class="cart-minus input-group-text">-</button>
+                                                          <input class="form-control cartItemQuantity" type="number" value="{{ item.quantity }}">
+                                                          <button class="cart-add input-group-text">+</button>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col align-items-center">
+                                              <div class="container">
+                                                  <div class="row justify-content-center">Total</div>
+                                                  <div class="cartSubTotal row justify-content-center text-danger fw-bolder">${{ item.productId.productPrice|mul:item.quantity }}</div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                    {% endfor %}
+                    </div>
+                    {% if item.count == 0 %}
+                        <div class="card mb-2" style="width: 90%;">
+                            <div class="card-body">
+                                <div class="row justify-content-center align-items-center" style="height: 403px;">
+                                    <div class="row w-50">
+                                        <img class="img-fluid" src="/static/cart/images/cart-empty.png" alt="" height="50px">
+                                    </div>
+                                    <div class="row justify-content-center fw-bolder" style="font-size: 20px;">You have no items in your shopping cart.</div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="col-5 p-0">
                     <div class="row p-4 fw-bolder justify-content-center" style="font-size: 25px;">Cart Summary</div>
