@@ -10,9 +10,3 @@ class UserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
-
-
-class CartForm(ModelForm):
-    class Meta:
-        model = Cart
-        fields = ['user', 'productId', 'quantity']

@@ -25,10 +25,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Authentication
-    path('login/', views.loginuser, name='loginuser'),
+    path('login/', views.login_user, name='login_user'),
+    path('logout/', views.logout_user, name='logout_user'),
     path('signup/', views.signup_user, name='signup_user'),
 
     # Polar Line Pages
+    path('account/', views.account, name='account'),
     path('shop/', views.shop, name='shop'),
     path('cart/', views.cart, name='cart'),
     path('cart/<int:cart_id>/remove', views.remove_item, name='remove_item'),

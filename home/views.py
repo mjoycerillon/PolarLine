@@ -1,13 +1,13 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
-from home.forms import UserForm, CartForm
-from home.models import Cart, Product
+from home.forms import UserForm
+from home.models import Cart
 
 
 def home(request):
@@ -22,7 +22,18 @@ def contactus(request):
     return render(request, 'contactus.html')
 
 
-def loginuser(request):
+def account(request):
+    return render(request, 'account.html')
+
+
+@login_required
+def logout_user(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('home')
+
+
+def login_user(request):
     if request.method == 'POST':
         user = authenticate(request, username=request.POST['username']
                             , password=request.POST['password'])
@@ -41,7 +52,7 @@ def loginuser(request):
 def cart(request):
     cart = Cart.objects.filter(user=request.user)
     if request.method == 'GET':
-        return render(request, 'cart.html', {'form': CartForm(), 'cart': cart})
+        return render(request, 'cart.html', {'cart': cart})
 
 
 def remove_item(request, cart_id):
