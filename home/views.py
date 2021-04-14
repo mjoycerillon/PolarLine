@@ -50,7 +50,10 @@ def login_user(request):
 
 
 def cart(request):
-    cart = Cart.objects.filter(user=request.user)
+    if request.user.is_authenticated:
+        cart = Cart.objects.filter(user=request.user)
+    else:
+        cart = []
     if request.method == 'GET':
         return render(request, 'cart.html', {'cart': cart})
 
