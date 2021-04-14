@@ -100,7 +100,7 @@
                 <li><a href="#"><img src="{% static '/home/images/search.png' %}" alt="Search" height="35"></a></li>
                 <li id="navShopBag"><a href="{% url 'cart' %}"><img src="{% static '/home/images/shop-bag.png' %}" alt="Shop Bag" height="35"></a></li>
                 <li id="navAccount" class="dropdown">
-                    <a class="navAccountLink" href="{% url 'login_user' %}"><img src="{% static 'home/images/account.png' %}" alt="Account" height="35"></a>
+                    <a class="navAccountLink" href="{% if user.is_authenticated %}{% url 'account' %}{% else %}{% url 'login_user' %}{% endif %}"><img src="{% static 'home/images/account.png' %}" alt="Account" height="35"></a>
                     <ul class="dropdown-menu nav-account-d-menu">
                         <li><a class="dropdown-item navAccountLink"
                                href="{% if user.is_authenticated %}{% url 'account' %}{% else %}{% url 'login_user' %}{% endif %}">
