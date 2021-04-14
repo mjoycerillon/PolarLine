@@ -1,0 +1,112 @@
+.shop-banner{
+    width: 100%;
+    position: relative;
+}
+
+.shop-banner img{
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.banner-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 900;
+    font-size: 50px;
+}
+
+.page-loc{
+    margin-top: 20px;
+    text-align: left;
+    color: gray;
+    width: 100%;
+    font-size: 15px;
+}
+
+.page-loc a{
+    margin-left: 3%;
+    text-decoration: none;
+    color: gray;
+}
+
+.shop-sortBy{
+    width: 100%;
+    text-align: right;
+}
+
+.shop-sortBy select{
+    width: 170px;
+    height: 35px;
+    margin-right: 3%;
+    color: grey;
+}
+
+.shop-mainbody{
+    width: 100%;
+    display: inline-flex;
+}
+
+.shop-filters{
+    width: 25%;
+    margin: 3%;
+    padding: 3%;
+    background-color: gainsboro;
+    line-height: 30px;
+}
+
+.shop-product{
+    margin-top: 3%;
+    display: inline-block;
+    width: 290px;
+    transition: 0.4s ease-in-out;
+    position: relative;
+    cursor: pointer;
+}
+
+
+.shop-product-image{
+    width: 90%;
+    height: auto;
+    padding: 5%;
+}
+
+.shop-product-name{
+    text-align: center;
+    line-height: 30px;
+}
+
+.shop-product-cost{
+    font-weight: bold;
+    text-align: center;
+    color : red;
+}
+
+.overlayButton{
+   opacity: 0;
+   z-index: -1;
+   position: absolute;
+   left : 85px;
+   top : 300px;
+   transition: 0.4s ease-in-out;
+   background-color: transparent;
+   text-shadow: 3px 3px 5px #000000;
+   box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+   color: white;
+   border: 2px solid white;
+   padding-left: 15px;
+   padding-right: 15px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+
+}
+.shop-product:hover img{
+   filter: blur(1px);
+}
+.shop-product:hover .overlayButton{
+   opacity: 1;
+   z-index: 1;
+}
