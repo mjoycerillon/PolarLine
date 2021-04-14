@@ -1,5 +1,195 @@
 {% extends 'base.html' %}
-
+{% load static %}
+<link rel="stylesheet" href="{% static '/shop/css/polarline-shop.css' %}">
 {% block content %}
-Shop Page
+<main>
+<div class="shop-banner">
+    <img src="{% static '/home/images/promo-img3.png'%}"/>
+    <div class="banner-text">WINTER COLLECTION 2021</div>
+</div>
+<div class="page-loc">
+    <a href="index.html">HOME</a> >> WOMEN 
+</div>
+<div class="shop-sortBy">
+    <select id="shopSortBy">
+        <option>Sort By</option>
+        <option>Price - Low to High</option>
+        <option>Price - High to Low</option>
+        <option>Discounts - Low to High</option>
+        <option>Name - Alphabetical Order</option>
+    </select>
+</div>
+<div class="shop-mainbody">
+    <div class="shop-filters">
+        <b>WOMEN'S</b> <br>
+        <input type="checkbox" id="shopTops"/>Tops <br>
+        <input type="checkbox" id="shopJackets"/>Jackets <br>
+        <input type="checkbox" id="shopCoats"/>Coats <br>
+        <input type="checkbox" id="shopBlazers"/>Blazers <br>
+        <input type="checkbox" id="shopPants"/>Pants <br>
+        <br>
+        <b>FILTER BY</b> <br>
+        <hr>
+        <input type="checkbox" id="shopFilterCotton"/>Cotton <br>
+        <input type="checkbox" id="shopFilterWool"/>Wool <br>
+        <input type="checkbox" id="shopFilterDenim"/>Denim <br>
+        <input type="checkbox" id="shopFilterKnit"/>Knit <br>
+        <input type="checkbox" id="shopFilterLeather"/>Leather <br>
+    </div>
+    <div class="shop-products">
+        <div class="shop-product" data-aos="fade-right">
+            <img src="/media/shop/images/shop7.png" class="shop-product-image"/>
+            <button class="overlayButton">ADD TO BAG</button>
+            <div class="shop-product-name">PolarLine Thermal Hoodie (Black) </div>
+            <div class="shop-product-cost">$94.99</div>
+        </div>
+        <div class="shop-product" data-aos="fade-up">
+            <img src="/media/shop/images/shop2.png" class="shop-product-image"/>
+            <button class="overlayButton">ADD TO BAG</button>
+            <div class="shop-product-name">PolarLine Jacket (Grey) </div>
+            <div class="shop-product-cost">$82.99</div>
+        </div>
+        <div class="shop-product" data-aos="fade-up">
+            <img src="/media/shop/images/shop3.png" class="shop-product-image"/>
+            <button class="overlayButton">ADD TO BAG</button>
+            <div class="shop-product-name">Lil Champ Sweater Hoodie (White) </div>
+            <div class="shop-product-cost">$94.99</div>
+        </div>
+        <div class="shop-product" data-aos="fade-left">
+            <img src="/media/shop/images/shop4.png" class="shop-product-image"/>
+            <button class="overlayButton">ADD TO BAG</button>
+            <div class="shop-product-name">Lil Champ Thermal (Pink) </div>
+            <div class="shop-product-cost">$54.99</div>
+        </div>
+        <div class="shop-product" data-aos="fade-right">
+            <img src="/media/shop/images/shop5.png" class="shop-product-image"/>
+            <button class="overlayButton">ADD TO BAG</button>
+            <div class="shop-product-name">PolarLine Thermals (Blue) </div>
+            <div class="shop-product-cost">$124.99</div>
+        </div>
+        <div class="shop-product" data-aos="fade-up">
+            <img src="/media/shop/images/shop6.png" class="shop-product-image"/>
+            <button class="overlayButton">ADD TO BAG</button>
+            <div class="shop-product-name">PL Hoodie (Black) </div>
+            <div class="shop-product-cost">$73.99</div>
+        </div>
+        <div class="shop-product" data-aos="fade-up">
+            <img src="/media/shop/images/shop-image-6.jpg" class="shop-product-image"/>
+            <button class="overlayButton">ADD TO BAG</button>
+            <div class="shop-product-name">PolarLine Long Coat (Grey) </div>
+            <div class="shop-product-cost">$54.99</div>
+        </div>
+        <div class="shop-product" data-aos="fade-left">
+            <img src="/media/shop/images/shop-img3.png" class="shop-product-image"/>
+            <button class="overlayButton">ADD TO BAG</button>
+            <div class="shop-product-name">Amelie Winter Puffer Jacket (Black) </div>
+            <div class="shop-product-cost">$43.99</div>
+        </div>
+        <div class="shop-product" data-aos="fade-right">
+            <img src="/media/shop/images/shop-image-1.jpg" class="shop-product-image"/>
+            <button class="overlayButton">ADD TO BAG</button>
+            <div class="shop-product-name">Z Sweater Coat (White) </div>
+            <div class="shop-product-cost">$94.99</div>
+        </div>
+        <div class="shop-product" data-aos="fade-up">
+            <img src="/media/shop/images/shop-image-2.jpg" class="shop-product-image"/>
+            <button class="overlayButton">ADD TO BAG</button>
+            <div class="shop-product-name">Au Revoir Sweater (White) </div>
+            <div class="shop-product-cost">$54.99</div>
+        </div>
+        <div class="shop-product" data-aos="fade-up">
+            <img src="/media/shop/images/shop-image-3.jpg" class="shop-product-image"/>
+            <button class="overlayButton">ADD TO BAG</button>
+            <div class="shop-product-name">PolarLine Long Coat (Blue) </div>
+            <div class="shop-product-cost">$0.99</div>
+        </div>
+        <div class="shop-product" data-aos="fade-left">
+            <img src="/media/shop/images/shop-image-4.jpg" class="shop-product-image"/>
+            <button class="overlayButton">ADD TO BAG</button>
+            <div class="shop-product-name">PolarLine Jacket (Yellow) </div>
+            <div class="shop-product-cost">$40.99</div>
+        </div>
+        
+    </div>
+</div>
+<script>
+    AOS.init();
+
+    $('.shop-product').click(function(){
+        var imgLoc = $(this).children('img').attr('src');
+        var prodTitle = $(this).children('.shop-product-name').text();
+        var prodPrice = $(this).children('.shop-product-cost').text().substr(1,$(this).children('.shop-product-cost').text().length);
+        var prodTitleParts = $(this).children('.shop-product-name').text().split(' ');
+        
+        var color = prodTitleParts[prodTitleParts.length-2].slice(1,prodTitleParts[prodTitleParts.length-2].length-1);
+        console.log(color);
+        localStorage.setItem("prod_color",color);
+        localStorage.setItem("img_loc",imgLoc);
+        localStorage.setItem("prod_title",prodTitle);
+        localStorage.setItem("prod_cost",prodPrice);
+        window.location.href="details.html";
+        var fromShopPage = true;
+        localStorage.setItem("fromShopPage",fromShopPage);
+    });
+
+    $('.overlayButton').click(function(e){
+    e.stopPropagation();
+    //e.preventDefault();
+    var isLoggedOn = localStorage.getItem("isLoggedOn");
+    //console.log(isLoggedOn);
+    var accounts = localStorage.getItem("accounts");
+
+    var accountsObj = JSON.parse(accounts);
+    //console.log(localStorage.getItem("current_user"));
+    console.log('button clicked');
+    swal("Success!", $(this).parent().children('.shop-product-name').text()+ " is added to bag.", "success");
+    //console.log(accountsObj[0]["cart"]);
+    if(isLoggedOn == "true")
+    {
+    var currentUser = JSON.parse(localStorage.getItem("current_user"));
+    currentUser["cart"].push(
+        {
+            "imageLocation" : $(this).parent().children('img').attr('src'),
+            "price" : $(this).parent().children('.shop-product-cost').text().substr(1,$(this).parent().children('.shop-product-cost').text().length), 
+            "product" : $(this).parent().children('.shop-product-name').text(),
+            "quantity" : "1"
+        }
+    );
+    accountsObj[0]["cart"].push(
+        {
+            "imageLocation" : $(this).parent().children('img').attr('src'),
+            "price" : $(this).parent().children('.shop-product-cost').text().substr(1,$(this).parent().children('.shop-product-cost').text().length),  
+            "product" : $(this).parent().children('.shop-product-name').text(),
+            "quantity" : "1"
+        }
+    );
+    //console.log(accountsObj[0]);
+    accounts = JSON.stringify(accountsObj);
+    var currUser = JSON.stringify(currentUser);
+    localStorage.setItem("current_user",currUser);
+    localStorage.setItem("accounts",accounts);
+    }
+    else{
+        var guestObj = localStorage.getItem("guest_user");
+        if (guestObj == null) {
+            guestObj = [];
+            localStorage.setItem("guest_user",JSON.stringify(guestObj));
+            guestObj = localStorage.getItem("guest_user");
+        }
+        guest = JSON.parse(guestObj);
+        guest.push(
+            {
+            "imageLocation" : $(this).parent().children('img').attr('src'),
+            "price" : $(this).parent().children('.shop-product-cost').text().substr(1,$(this).parent().children('.shop-product-cost').text().length), 
+            "product" : $(this).parent().children('.shop-product-name').text(),
+            "quantity" : "1"
+            }
+        );
+        var guestUser = JSON.stringify(guest);
+        localStorage.setItem("guest_user",guestUser);
+        console.log(localStorage.getItem("guest_user"));
+    }
+    });
+</script>
+</main>
 {% endblock %}
