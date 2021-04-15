@@ -11,16 +11,10 @@ $(function() {
         $(this).toggleClass("filter");
     });
 
-    // Calling the plugin Owl Carousel
-    $('.owl-carousel').owlCarousel({
-        stagePadding: 0,
-        autoplay:true,
-        autoplayTimeout:5000,
-        animateOut: 'fadeOut',
-        items:1,
-        loop:true,
-        responsiveClass:true
-    });
+    $('.carousel').carousel({
+        interval: 5000,
+        ride: 'carousel'
+    })
 
 });
 
