@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
 from home.forms import UserForm
-from home.models import Cart
+from home.models import Cart, Product
 
 
 def home(request):
@@ -15,7 +15,8 @@ def home(request):
 
 
 def shop(request):
-    return render(request, 'shop.html')
+    product = Product.objects.all()
+    return render(request, 'shop.html',{'product':product})
 
 
 def contactus(request):
