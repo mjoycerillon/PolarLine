@@ -41,7 +41,7 @@ def login_user(request):
             return render(request,
                           'login.html',
                           {'form': AuthenticationForm(),
-                           'error': 'Username and password did not match'})
+                           'error': 'Username or password you entered is incorrect.'})
         else:
             login(request, user)
             return redirect('home')
