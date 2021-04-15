@@ -1,12 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Login</h1>
-<h2>{{ error }}</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-dark" type="submit">Login</button><br>
-    <span>Don't have an account?</span><a href="{% url 'signup_user' %}">Sign Up</a>
-</form>
+<div class="container py-5">
+    <div class="card m-auto" style="max-width: 330px;">
+      <div class="card-body">
+          <h5 class="card-title">LOGIN</h5>
+          <form method="POST" class="m-auto">
+              {% csrf_token %}
+              <div class="form-group p-2">
+                  <div class="row ps-4">
+                      <div class="p-0 col-3">
+                          <div class="px-2 d-flex justify-content-end">{{ form.username.label }}</div>
+                      </div>
+                      <div class="p-0 col-9">
+                          <div class="d-flex">{{ form.username }}</div>
+                      </div>
+                  </div>
+            </div>
+            <div class="form-group p-2">
+                <div class="row ps-4">
+                    <div class="p-0 col-3">
+                        <div class="px-2 d-flex justify-content-end">{{ form.password.label }}</div>
+                    </div>
+                    <div class="p-0 col-9">
+                        <div class="d-flex">{{ form.password }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group py-3 ps-2">
+                <div class="d-grid col-12 mx-auto">
+                    <button class="btn btn-dark btn-block" type="submit">Login</button><br>
+                </div>
+            </div>
+            <span>Don't have an account? </span><a href="{% url 'signup_user' %}">Sign Up</a>
+        </form>
+      </div>
+    </div>
+</div>
 {% endblock %}

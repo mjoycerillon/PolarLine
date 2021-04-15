@@ -172,7 +172,7 @@ nav{
 
 /* Style for the body */
 body {
-    background-color: whitesmoke;
+    background-color: whitesmoke !important;
     margin: 0;
     padding: 0;
 }
