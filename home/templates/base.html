@@ -18,6 +18,9 @@
     {% if request.get_full_path == "/shop/" %}
     <link rel="stylesheet" href="{% static 'shop/css/polarline-shop.css' %}">
     {% endif %}
+    {% if request.get_full_path == "/details/" %}
+    <link rel="stylesheet" href="{% static 'details/css/polarline-details.css' %}">
+    {% endif %}
 
     <!-- Plugins Stylesheets -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
