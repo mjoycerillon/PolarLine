@@ -18,6 +18,9 @@ def shop(request):
     product = Product.objects.all()
     return render(request, 'shop.html',{'product':product})
 
+def details(request):
+    pass
+
 
 def contactus(request):
     return render(request, 'contactus.html')
