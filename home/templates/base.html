@@ -18,7 +18,7 @@
     {% if request.get_full_path == "/shop/" %}
     <link rel="stylesheet" href="{% static 'shop/css/polarline-shop.css' %}">
     {% endif %}
-    {% if request.get_full_path == "/details/" %}
+    {% if request.get_full_path|slice:":9" == "/details/" %}
     <link rel="stylesheet" href="{% static 'details/css/polarline-details.css' %}">
     {% endif %}
 

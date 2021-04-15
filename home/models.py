@@ -14,13 +14,6 @@ class Product(models.Model):
     productSlug = models.SlugField(max_length=40, default=productName)
     created = models.DateTimeField(auto_now_add=True)
 
-    def get_absolute_url(self):
-        """
-        This method will get the absolute url for the product details page
-        :return:
-        """
-        return reverse('details', kwargs={'productSlug': self.productSlug})
-
     def __str__(self):
         """
         This method overrides the str method to return the product name
@@ -28,6 +21,13 @@ class Product(models.Model):
         :return: Product Name
         """
         return self.productName
+
+    def get_absolute_url(self):
+        """
+        This method will get the absolute url for the product details page
+        :return: Slug
+        """
+        return reverse('details', kwargs={'productSlug': self.productSlug})
 
 
 class Cart(models.Model):
