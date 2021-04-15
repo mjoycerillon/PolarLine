@@ -3,25 +3,68 @@
 {% load static %}
 <h1>Register</h1>
 <h2>{{ error }}</h2>
-<form method="POST">
+<form method="POST" class="w-25">
     {% csrf_token %}
-    {{ form.username.label }}
-    {{ form.username }}
-
-    {{ form.first_name.label }}
-    {{ form.first_name }}
-
-    {{ form.last_name.label }}
-    {{ form.last_name }}
-
-    {{ form.email.label }}
-    {{ form.email }}
-
-    {{ form.password1.label }}
-    {{ form.password1 }}
-
-    {{ form.password2.label }}
-    {{ form.password2 }}
+    <div class="form-group p-2">
+        <div class="row">
+            <div class="col">
+                {{ form.username.label }}
+            </div>
+            <div class="col">
+                {{ form.username }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group p-2">
+        <div class="row">
+            <div class="col">
+                {{ form.first_name.label }}
+            </div>
+            <div class="col">
+                {{ form.first_name }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group p-2">
+        <div class="row">
+            <div class="col">
+                {{ form.last_name.label }}
+            </div>
+            <div class="col">
+                {{ form.last_name }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group p-2">
+        <div class="row">
+            <div class="col">
+                {{ form.email.label }}
+            </div>
+            <div class="col">
+                {{ form.email }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group p-2">
+        <div class="row">
+            <div class="col">
+                {{ form.password1.label }}
+            </div>
+            <div class="col">
+                {{ form.password1 }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group p-2">
+        <div class="row">
+            <div class="col">
+                {{ form.password2.label }}
+            </div>
+            <div class="col">
+                {{ form.password2 }}
+            </div>
+        </div>
+    </div>
     <button class="btn btn-dark" type="submit">Sign Up</button><br>
     <span>Already have an account?</span><a href="{% url 'login_user' %}">Login</a>
 </form>
