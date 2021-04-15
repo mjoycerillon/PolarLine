@@ -37,67 +37,14 @@
         <input type="checkbox" id="shopFilterLeather"/>Leather <br>
     </div>
     <div class="shop-products">
-        <div class="shop-product" data-aos="fade-right">
-            <img src="/media/shop/images/shop7.png" class="shop-product-image"/>
-            <div class="shop-product-name">PolarLine Thermal Hoodie (Black) </div>
-            <div class="shop-product-cost">$94.99</div>
-        </div>
+        {% for p in product  %}
         <div class="shop-product" data-aos="fade-up">
-            <img src="/media/shop/images/shop2.png" class="shop-product-image"/>
-            <div class="shop-product-name">PolarLine Jacket (Grey) </div>
-            <div class="shop-product-cost">$82.99</div>
+            <img src="{{p.productImage.url}}" class="shop-product-image"/>
+            <div class="shop-product-name">{{p.productName}}</div>
+            <div class="shop-product-cost">${{p.productPrice}}</div>
         </div>
-        <div class="shop-product" data-aos="fade-up">
-            <img src="/media/shop/images/shop3.png" class="shop-product-image"/>
-            <div class="shop-product-name">Lil Champ Sweater Hoodie (White) </div>
-            <div class="shop-product-cost">$94.99</div>
-        </div>
-        <div class="shop-product" data-aos="fade-left">
-            <img src="/media/shop/images/shop4.png" class="shop-product-image"/>
-            <div class="shop-product-name">Lil Champ Thermal (Pink) </div>
-            <div class="shop-product-cost">$54.99</div>
-        </div>
-        <div class="shop-product" data-aos="fade-right">
-            <img src="/media/shop/images/shop5.png" class="shop-product-image"/>
-            <div class="shop-product-name">PolarLine Thermals (Blue) </div>
-            <div class="shop-product-cost">$124.99</div>
-        </div>
-        <div class="shop-product" data-aos="fade-up">
-            <img src="/media/shop/images/shop6.png" class="shop-product-image"/>
-            <div class="shop-product-name">PL Hoodie (Black) </div>
-            <div class="shop-product-cost">$73.99</div>
-        </div>
-        <div class="shop-product" data-aos="fade-up">
-            <img src="/media/shop/images/shop-image-6.jpg" class="shop-product-image"/>
-            <div class="shop-product-name">PolarLine Long Coat (Grey) </div>
-            <div class="shop-product-cost">$54.99</div>
-        </div>
-        <div class="shop-product" data-aos="fade-left">
-            <img src="/media/shop/images/shop-img3.png" class="shop-product-image"/>
-            <div class="shop-product-name">Amelie Winter Puffer Jacket (Black) </div>
-            <div class="shop-product-cost">$43.99</div>
-        </div>
-        <div class="shop-product" data-aos="fade-right">
-            <img src="/media/shop/images/shop-image-1.jpg" class="shop-product-image"/>
-            <div class="shop-product-name">Z Sweater Coat (White) </div>
-            <div class="shop-product-cost">$94.99</div>
-        </div>
-        <div class="shop-product" data-aos="fade-up">
-            <img src="/media/shop/images/shop-image-2.jpg" class="shop-product-image"/>
-            <div class="shop-product-name">Au Revoir Sweater (White) </div>
-            <div class="shop-product-cost">$54.99</div>
-        </div>
-        <div class="shop-product" data-aos="fade-up">
-            <img src="/media/shop/images/shop-image-3.jpg" class="shop-product-image"/>
-            <div class="shop-product-name">PolarLine Long Coat (Blue) </div>
-            <div class="shop-product-cost">$0.99</div>
-        </div>
-        <div class="shop-product" data-aos="fade-left">
-            <img src="/media/shop/images/shop-image-4.jpg" class="shop-product-image"/>
-            <div class="shop-product-name">PolarLine Jacket (Yellow) </div>
-            <div class="shop-product-cost">$40.99</div>
-        </div>
-        
+        {% endfor %}
+
     </div>
 </div>
 </main>
