@@ -1,9 +1,24 @@
 from django.contrib.auth.models import User
 from django.db import models
+from phone_field import PhoneField
+from django.urls import reverse
 
 
 # Create your models here.
-from django.urls import reverse
+class Profile(models.Model):
+    """ This class inherits the class Model for Profile table """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = PhoneField(blank=True, help_text='Contact phone number')
+    birth_date = models.DateField(null=True, blank=True)
+    billing_address = models.CharField(max_length=100, blank=True)
+    shipping_address = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        """
+        This method overrides the str method to return the username
+        :return: Username
+        """
+        return self.user.__str__()
 
 
 class Product(models.Model):
@@ -48,4 +63,5 @@ class Cart(models.Model):
         :return:
         """
         return f'{self.user} | {self.productId.__str__()} | {self.quantity}'
+
 
