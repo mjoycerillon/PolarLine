@@ -2,5 +2,46 @@
 
 {% block content %}
 {% load static %}
-Details Page
+<main>
+    <div class="product-gallery">
+        <div class="product-gallery-column1">
+            <div id="imgDetailsGalleryCol1Image1"><img src="./images/details/details-img2.png" height="150"/></div>
+            <div id="imgDetailsGalleryCol1Image2"><img src="./images/details/details-img1.png" height="150"/></div>
+            <div id="imgDetailsGalleryCol1Image3"><img src="./images/details/details-img4.png" height="150"/></div>
+        </div>
+        <div class="product-gallery-column2">
+        <img src="./images/details/details-img3.png" height="470"/>
+        </div>
+    </div>
+    <div class="product-desc">
+        <span id="productName">Amelie Winter Puffer Jacket </span><button class="like-button"></button><br>
+        <span id="productCost">$43.99</span> <br>
+        <span id="productReview">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span> 
+            4.9 | Reviews  
+        </span><br><br>
+        <span id="productColor">COLOR  <br><button class="colorSelBlack" ></button></span><br><br>
+        <span id="productSize">SIZE  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Size Guide >></a><br>
+            <div class="sizeSel">S</div>&nbsp;&nbsp;<div class="sizeSel">M</div>&nbsp;&nbsp;<div class="sizeSel">L</div>&nbsp;&nbsp;<div class="sizeSel">XL</div>
+        </span><br>
+        <span id="productAvailability">Availability : In Stock</span> <br><br>
+        <button id="btnDetailsAddToBag">ADD TO BAG</button>
+        <br>
+        <p>
+            <b>Product Description</b>
+            <p class="product-description">
+                Material : Polyester <br>
+                Weight : 0.3100kg <br>
+                Brand : Loren Ipsum <br>
+                Long cuffed sleeve <br>
+                2 side pockets <br>
+                Front Zip Fastening
+            </p>
+        </p>
+    </div>
+</main>
 {% endblock %}
