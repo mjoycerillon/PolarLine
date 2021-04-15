@@ -1,71 +1,80 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<h1>Register</h1>
-<h2>{{ error }}</h2>
-<form method="POST" class="w-25">
-    {% csrf_token %}
-    <div class="form-group p-2">
-        <div class="row">
-            <div class="col">
-                {{ form.username.label }}
-            </div>
-            <div class="col">
-                {{ form.username }}
-            </div>
+<div class="container py-5">
+    <div class="card shadow p-3 mb-5 bg-white rounded m-auto" style="max-width: 330px;">
+        <div class="py-2 d-flex justify-content-center fw-bold" style="font-size: 20px;">REGISTER</div>
+        <div class="card-body">
+            <form method="POST" class="m-auto">
+                {% csrf_token %}
+                <div class="form-group p-4">
+                    <div class="row ps-4">
+                        <div class="p-0 col-3">
+                            <div class="px-2 d-flex justify-content-end">{{ form.username.label }}</div>
+                        </div>
+                        <div class="p-0 col-9">
+                            <div class="d-flex">{{ form.username }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group p-4">
+                    <div class="row ps-4">
+                        <div class="p-0 col-3">
+                            <div class="px-2 d-flex justify-content-end">{{ form.first_name.label }}</div>
+                        </div>
+                        <div class="p-0 col-9">
+                            <div class="d-flex">{{ form.first_name }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group p-4">
+                    <div class="row ps-4">
+                        <div class="p-0 col-3">
+                            <div class="px-2 d-flex justify-content-end">{{ form.last_name.label }}</div>
+                        </div>
+                        <div class="p-0 col-9">
+                            <div class="d-flex">{{ form.last_name }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group p-4">
+                    <div class="row ps-4">
+                        <div class="p-0 col-3">
+                            <div class="px-2 d-flex justify-content-end">{{ form.email.label }}</div>
+                        </div>
+                        <div class="p-0 col-9">
+                            <div class="d-flex">{{ form.email }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group p-4">
+                    <div class="row ps-4">
+                        <div class="p-0 col-3">
+                            <div class="px-2 d-flex justify-content-end">{{ form.password1.label }}</div>
+                        </div>
+                        <div class="p-0 col-9">
+                            <div class="d-flex">{{ form.password1 }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group p-4">
+                    <div class="row ps-4">
+                        <div class="p-0 col-3">
+                            <div class="px-2 d-flex justify-content-end">{{ form.password2.label }}</div>
+                        </div>
+                        <div class="p-0 col-9">
+                            <div class="d-flex">{{ form.password2 }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group py-3 ps-2">
+                    <div class="d-grid col-12 mx-auto">
+                        <button class="btn btn-dark btn-block" type="submit">Sign Up</button><br>
+                    </div>
+                </div>
+                <span>Already have an account?</span><a href="{% url 'login_user' %}">Login</a>
+            </form>
         </div>
     </div>
-    <div class="form-group p-2">
-        <div class="row">
-            <div class="col">
-                {{ form.first_name.label }}
-            </div>
-            <div class="col">
-                {{ form.first_name }}
-            </div>
-        </div>
-    </div>
-    <div class="form-group p-2">
-        <div class="row">
-            <div class="col">
-                {{ form.last_name.label }}
-            </div>
-            <div class="col">
-                {{ form.last_name }}
-            </div>
-        </div>
-    </div>
-    <div class="form-group p-2">
-        <div class="row">
-            <div class="col">
-                {{ form.email.label }}
-            </div>
-            <div class="col">
-                {{ form.email }}
-            </div>
-        </div>
-    </div>
-    <div class="form-group p-2">
-        <div class="row">
-            <div class="col">
-                {{ form.password1.label }}
-            </div>
-            <div class="col">
-                {{ form.password1 }}
-            </div>
-        </div>
-    </div>
-    <div class="form-group p-2">
-        <div class="row">
-            <div class="col">
-                {{ form.password2.label }}
-            </div>
-            <div class="col">
-                {{ form.password2 }}
-            </div>
-        </div>
-    </div>
-    <button class="btn btn-dark" type="submit">Sign Up</button><br>
-    <span>Already have an account?</span><a href="{% url 'login_user' %}">Login</a>
-</form>
+</div>
 {% endblock %}
