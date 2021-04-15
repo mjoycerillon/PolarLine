@@ -1,0 +1,161 @@
+main{
+    display: block;
+}
+
+.product-gallery{
+    float: left;
+    width: 60%;
+    display: inline-flex;
+}
+.product-desc{
+    float: left;
+    width: 40%;
+    margin-top: 2.5%;
+    
+}
+
+.product-gallery-column1{
+    display: grid;
+    padding: 5%;
+}
+
+.product-gallery-column2{
+    margin-left:auto;
+    margin-right:auto;
+    width: 50%; 
+    padding: 5%;
+}
+
+
+#imgDetailsGalleryCol1Image1 {
+    float:left; 
+    margin: 2%;
+    cursor: pointer;
+}
+
+#imgDetailsGalleryCol1Image2{
+    float:left; 
+    clear: left;
+    margin: 2%;
+    cursor: pointer;
+}
+
+#imgDetailsGalleryCol1Image3{
+    float:left; 
+    clear: left;
+    margin: 2%;
+    cursor: pointer;
+}
+
+#btnDetailsAddToBag{
+    background-color: black;
+    color: white;
+    transition: 0.3s ease-in-out;
+    height: 40px;
+    width: 150px;
+    font-size: 20px;
+    padding: 5px;
+}
+
+#btnDetailsAddToBag:hover{
+    background-color: white;
+    border : 2px solid black;
+    color: black;
+}
+
+.product-description{
+    color: gray;
+    font-size: 15px;
+}
+
+a{
+    font-size: 13px;
+    color: brown;
+    text-decoration: none;
+}
+
+#productName {
+    font-weight: bold;
+    font-size: 35px;
+}
+
+#productCost{
+    font-weight: bold;
+    font-size: 35px;
+    color: red;
+}
+
+#productReview{
+    font-weight: bold;
+}
+
+.checked {
+     color: orange;
+}
+
+#productSize{
+    font-weight: bold;
+}
+
+#productAvailability{
+    font-size: small;
+    color: grey;
+}
+
+.like-button {
+ display: inline-block;
+position: relative;
+font-size: 32px;
+cursor: pointer;
+}
+.like-button::before {
+    font-size: 35px;
+    color: #000;
+    content: '❤';
+    position: absolute;
+    left: 53%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+}
+.like-button::after {
+    font-size: 35px;
+    color: red;
+    content: '❤';
+    position: absolute;
+    left: 53%;
+    top: 45%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s;
+}
+
+.like-button.liked::after {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.colorSelBlack{
+    height: 28px;
+    width: 28px;
+    background-color: black;
+    border: 3px solid grey;
+}
+
+.colorSelBlack:focus{
+    border: 4px solid red;
+}
+
+#productColor{
+    font-weight: bold;
+}
+
+.sizeSel{
+    border: 1px solid gray;
+    background-color: white;
+    color: gray;
+    height: 30px;
+    width : 30px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+
+
