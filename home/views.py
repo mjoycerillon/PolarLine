@@ -18,8 +18,12 @@ def shop(request):
     product = Product.objects.all()
     return render(request, 'shop.html',{'product':product})
 
-def details(request):
-    pass
+def details(request,product_id):
+    p = get_object_or_404(Product, id=product_id) 
+    if request.method == 'GET':
+        print(p)
+        return render(request,'details.html', {'product': p})
+    
 
 
 def contactus(request):

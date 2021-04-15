@@ -5,17 +5,17 @@
 <main>
     <div class="product-gallery">
         <div class="product-gallery-column1">
-            <div id="imgDetailsGalleryCol1Image1"><img src="./images/details/details-img2.png" height="150"/></div>
-            <div id="imgDetailsGalleryCol1Image2"><img src="./images/details/details-img1.png" height="150"/></div>
-            <div id="imgDetailsGalleryCol1Image3"><img src="./images/details/details-img4.png" height="150"/></div>
+            <div id="imgDetailsGalleryCol1Image1"><img src="https://source.unsplash.com/1000x1500/?wool" height="150"/></div>
+            <div id="imgDetailsGalleryCol1Image2"><img src="https://source.unsplash.com/1000x1500/?sweater" height="150"/></div>
+            <div id="imgDetailsGalleryCol1Image3"><img src="https://source.unsplash.com/1000x1500/?jacket" height="150"/></div>
         </div>
         <div class="product-gallery-column2">
-        <img src="./images/details/details-img3.png" height="470"/>
+        <img src="{{ product.productImage.url }}" height="470"/>
         </div>
     </div>
     <div class="product-desc">
-        <span id="productName">Amelie Winter Puffer Jacket </span><button class="like-button"></button><br>
-        <span id="productCost">$43.99</span> <br>
+        <span id="productName">{{ product.productName }}</span><button class="like-button"></button><br>
+        <span id="productCost">${{ product.productPrice }}</span> <br>
         <span id="productReview">
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
@@ -29,7 +29,7 @@
             <div class="sizeSel">S</div>&nbsp;&nbsp;<div class="sizeSel">M</div>&nbsp;&nbsp;<div class="sizeSel">L</div>&nbsp;&nbsp;<div class="sizeSel">XL</div>
         </span><br>
         <span id="productAvailability">Availability : In Stock</span> <br><br>
-        <button id="btnDetailsAddToBag">ADD TO BAG</button>
+        <button type="submit" id="btnDetailsAddToBag">ADD TO BAG</button>
         <br>
         <p>
             <b>Product Description</b>

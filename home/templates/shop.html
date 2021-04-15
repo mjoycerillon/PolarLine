@@ -38,11 +38,13 @@
     </div>
     <div class="shop-products">
         {% for p in product  %}
+        <a href=" {% url 'details' p.id %}">
         <div class="shop-product" data-aos="fade-up">
-            <img src="{{p.productImage.url}}" class="shop-product-image"/>
-            <div class="shop-product-name">{{p.productName}}</div>
-            <div class="shop-product-cost">${{p.productPrice}}</div>
+            <img src="{{ p.productImage.url }}" class="shop-product-image"/>
+            <div class="shop-product-name">{{ p.productName }}</div>
+            <div class="shop-product-cost">${{ p.productPrice }}</div>
         </div>
+        </a>
         {% endfor %}
 
     </div>
