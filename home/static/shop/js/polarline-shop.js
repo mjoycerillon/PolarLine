@@ -1,4 +1,7 @@
-AOS.init();
+$(function() {
+    $(window).on('load', function () {
+        AOS.init();
+    });
 
     $('.shop-product').click(function(){
         var imgLoc = $(this).children('img').attr('src');
@@ -75,3 +78,4 @@ AOS.init();
         console.log(localStorage.getItem("guest_user"));
     }
     });
+});
