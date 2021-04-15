@@ -1,6 +1,6 @@
-document.querySelector('.like-button').addEventListener('click', (e) => {
-    e.currentTarget.classList.toggle('liked');
-    });
+//document.querySelector('.like-button').addEventListener('click', (e) => {
+//    e.currentTarget.classList.toggle('liked');
+//    });
 
     $('#imgDetailsGalleryCol1Image2').click(function(){
         $(this).children('img').fadeOut(0);
