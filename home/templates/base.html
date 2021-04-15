@@ -9,12 +9,19 @@
     <title>Polar Line | Home</title>
     <!-- Custom Stylesheets -->
     <link rel="stylesheet" href="{% static 'home/css/polarline.css' %}">
+    {% if request.get_full_path == "/" %}
     <link rel="stylesheet" href="{% static 'home/css/polarline-home.css' %}">
+    {% endif %}
+    {% if request.get_full_path == "/cart/" %}
     <link rel="stylesheet" href="{% static 'cart/css/polarline-cart.css' %}">
+    {% endif %}
+    {% if request.get_full_path == "/shop/" %}
     <link rel="stylesheet" href="{% static 'shop/css/polarline-shop.css' %}">
+    {% endif %}
 
     <!-- Plugins Stylesheets -->
     <link rel="stylesheet" href="{% static 'home/plugins/OwlCarousel/dist/assets/owl.carousel.min.css' %}"/>
+
     <!--link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"-->
     
     <!-- Other Stylesheets -->
@@ -24,6 +31,7 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
     <!-- BootStrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
