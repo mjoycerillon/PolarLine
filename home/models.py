@@ -3,11 +3,18 @@ from django.db import models
 
 
 # Create your models here.
+from django.urls import reverse
+
+
 class Product(models.Model):
     productName = models.CharField(max_length=100)
     productPrice = models.FloatField(default=0)
     productImage = models.ImageField(upload_to='shop/images/')
+    productSlug = models.SlugField(max_length=40, default=productName)
     created = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse('details', kwargs={'productSlug': self.productSlug})
 
     def __str__(self):
         return self.productName
@@ -24,13 +31,4 @@ class Cart(models.Model):
 
     def __str__(self):
         return f'{self.user} | {self.productId.__str__()} | {self.quantity}'
-
-
-class Promotion(models.Model):
-    promoDesc = models.CharField(max_length=25)
-    promoImage = models.ImageField(upload_to='promo/images/')
-
-    def __str__(self):
-        return self.promoDesc
-
 
