@@ -23,8 +23,22 @@ def shop(request):
 def details(request,product_id):
     p = get_object_or_404(Product, id=product_id) 
     if request.method == 'GET':
-        print(p)
+        #print(p)
         return render(request,'details.html', {'product': p})
+
+@login_required
+def add_to_cart(request,product_id):
+    p = get_object_or_404(Product, pk=product_id)
+    #print(p)
+    if request.method == 'POST':
+        cart = Cart.objects.filter(user=request.user)
+        cart_item = Cart.objects.create(user=request.user,productId=p)
+        #cart.products.add(cart_item)
+        print(cart)
+        #cart.save()
+        #cart.add_to_cart(product_id)
+    return redirect('details')
+
     
 
 def contactus(request):
