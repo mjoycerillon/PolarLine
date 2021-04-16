@@ -1,12 +1,13 @@
+from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
 from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
-from home.forms import UserForm
+from home.forms import UserForm, ProfileForm, AccountForm
 from home.models import Cart, Product
 
 
@@ -18,6 +19,7 @@ def shop(request):
     product = Product.objects.all()
     return render(request, 'shop.html',{'product':product})
 
+
 def details(request,product_id):
     p = get_object_or_404(Product, id=product_id) 
     if request.method == 'GET':
@@ -25,13 +27,8 @@ def details(request,product_id):
         return render(request,'details.html', {'product': p})
     
 
-
 def contactus(request):
     return render(request, 'contactus.html')
-
-
-def account(request):
-    return render(request, 'account.html')
 
 
 @login_required
@@ -111,4 +108,33 @@ def signup_user(request):
             return render(request, 'signup.html', {'form': UserForm(), 'error': 'Passwords did not match'})
     else:
         return render(request, 'signup.html', {'form': UserForm()})
+
+
+@login_required
+@transaction.atomic
+def account(request):
+    if request.method == 'POST':
+        user_form = AccountForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return render(request, 'account.html', {
+                'user_form': user_form,
+                'profile_form': profile_form,
+                'message': 'Your profile was successfully updated!'
+            })
+        else:
+            return render(request, 'account.html', {
+                'user_form': user_form,
+                'profile_form': profile_form,
+                'error': 'Error occurred while submitting the form. '
+            })
+    else:
+        user_form = AccountForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'account.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
 

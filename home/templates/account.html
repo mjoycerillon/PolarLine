@@ -27,11 +27,70 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">{{ user.first_name }}</p>
-                        <p class="card-text">{{ user.last_name }}</p>
-                        <p class="card-text">{{ user.email }}</p>
-                        <p class="card-text">{{ user.profile.phone }}</p>
-                        <p class="card-text">{{ user.profile.birth_date }}</p>
+                        <form method="post">
+                            {% csrf_token %}
+                            {% if message %}
+                            <div class="alert alert-success" role="alert">
+                                {{ message }}
+                            </div>
+                            {% endif %}
+                            {% if error %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error }}
+                            </div>
+                            {% endif %}
+                            <div class="form-group p-2">
+                                <div class="row">
+                                    <div class="col-md-2 p-0">
+                                        {{ user_form.first_name.label }}
+                                    </div>
+                                    <div class="col-md-10 p-0">
+                                        {{ user_form.first_name }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group p-2">
+                                <div class="row">
+                                    <div class="col-md-2 p-0">
+                                        {{ user_form.last_name.label }}
+                                    </div>
+                                    <div class="col-md-10 p-0">
+                                        {{ user_form.last_name }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group p-2">
+                                <div class="row">
+                                    <div class="col-md-2 p-0">
+                                        {{ user_form.email.label }}
+                                    </div>
+                                    <div class="col-md-10 p-0">
+                                        {{ user_form.email }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group p-2">
+                                <div class="row">
+                                    <div class="col-md-2 p-0">
+                                        {{ profile_form.phone.label }}
+                                    </div>
+                                    <div class="col-md-10 p-0">
+                                        {{ profile_form.phone }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group p-2">
+                                <div class="row">
+                                    <div class="col-md-2 p-0">
+                                        {{ profile_form.birth_date.label }}
+                                    </div>
+                                    <div class="col-md-10 p-0">
+                                        {{ profile_form.birth_date }}
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit">Save changes</button>
+                        </form>
                     </div>
                 </div>
             </div>
