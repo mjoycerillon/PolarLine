@@ -37,6 +37,7 @@ def details(request, product_id):
         else:
             cart_item = get_object_or_404(Cart, id=cart.id)
             if request.method == 'POST':
+                cart_item.quantity += 1
                 cart_item.save()
                 return redirect('cart')
 
