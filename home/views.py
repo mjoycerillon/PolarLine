@@ -113,45 +113,25 @@ def signup_user(request):
 @login_required
 @transaction.atomic
 def account(request):
-        if request.method == 'POST':
-            user_form = AccountForm(request.POST, instance=request.user)
-            profile_form = ProfileForm(request.POST, instance=request.user.profile)
-            address_form = AddressForm(request.POST, instance=request.user.address)
 
-            if user_form.is_valid() and profile_form.is_valid() and address_form.is_valid():
-                user_form.save()
-                profile_form.save()
-                address_form.save()
-                return render(request, 'account.html', {
-                    'user_form': user_form,
-                    'profile_form': profile_form,
-                    'address_form': address_form,
-                    'profile_message': 'Your profile was successfully updated!'
-                })
-            else:
-                return render(request, 'account.html', {
-                    'user_form': user_form,
-                    'profile_form': profile_form,
-                    'address_form': address_form,
-                    'error': 'Error occurred while submitting the form. '
-                })
-        else:
-            user_form = AccountForm(instance=request.user)
-            profile_form = ProfileForm(instance=request.user.profile)
-            address_form = AddressForm(instance=request.user.address)
+    user_form = AccountForm(instance=request.user)
+    profile_form = ProfileForm(instance=request.user.profile)
+    address_form = AddressForm(instance=request.user.address)
 
-        return render(request, 'account.html', {
-            'user_form': user_form,
-            'profile_form': profile_form,
-            'address_form': address_form,
-        })
+    return render(request, 'account.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'address_form': address_form,
+    })
 
 
+@login_required
+@transaction.atomic
 def profile(request):
     if request.method == 'POST':
         user_form = AccountForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        address_form = AddressForm(request.POST, instance=request.user.address)
+        address_form = AddressForm(instance=request.user.address)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
@@ -180,3 +160,37 @@ def profile(request):
         'address_form': address_form,
     })
 
+
+@login_required
+@transaction.atomic
+def address(request):
+    if request.method == 'POST':
+        user_form = AccountForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
+        address_form = AddressForm(request.POST, instance=request.user.address)
+
+        if address_form.is_valid():
+            address_form.save()
+            return render(request, 'account.html', {
+                'user_form': user_form,
+                'profile_form': profile_form,
+                'address_form': address_form,
+                'address_message': 'Your address was successfully updated!'
+            })
+        else:
+            return render(request, 'account.html', {
+                'user_form': user_form,
+                'profile_form': profile_form,
+                'address_form': address_form,
+                'error': 'Error occurred while submitting the form. '
+            })
+    else:
+        user_form = AccountForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
+        address_form = AddressForm(instance=request.user.address)
+
+    return render(request, 'account.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'address_form': address_form,
+    })

@@ -32,6 +32,7 @@ urlpatterns = [
     # Polar Line Pages
     path('account/', views.account, name='account'),
     path('account/profile', views.profile, name='profile'),
+    path('account/address', views.address, name='address'),
     path('shop/', views.shop, name='shop'),
     path('cart/', views.cart, name='cart'),
     path('cart/<int:cart_id>/remove', views.remove_item, name='remove_item'),
