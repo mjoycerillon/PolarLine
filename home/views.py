@@ -147,7 +147,7 @@ def profile(request):
                 'user_form': user_form,
                 'profile_form': profile_form,
                 'address_form': address_form,
-                'error': 'Error occurred while submitting the form. '
+                'profile_error': 'Error occurred while submitting the form. '
             })
     else:
         user_form = AccountForm(instance=request.user)
@@ -182,7 +182,8 @@ def address(request):
                 'user_form': user_form,
                 'profile_form': profile_form,
                 'address_form': address_form,
-                'error': 'Error occurred while submitting the form. '
+                'address_error': 'Error occurred while submitting the form. '
+
             })
     else:
         user_form = AccountForm(instance=request.user)
