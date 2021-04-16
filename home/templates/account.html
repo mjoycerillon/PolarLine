@@ -2,8 +2,60 @@
 
 {% block content %}
 {% load static %}
-{{ user.username }} <br>
-{{ user.first_name }} <br>
-{{ user.last_name }} <br>
-{{ user.email }} <br>
+<div class="container py-3">
+    <div class="row">
+        <div class="col-md-3 px-0" style="padding-top: 5em;">
+            <div class="row">
+                <h5 class="py-1 fw-bold">My Account</h5>
+                <h5 class="py-1 text-muted">Account Settings</h5>
+                <h5 class="py-1 text-muted">Orders & Tracking</h5>
+                <h5 class="py-1 text-muted">Exchange & Return</h5>
+                <h5 class="py-1 text-muted">Wishlist</h5>
+            </div>
+        </div>
+        <div class="col-md-9 p-0">
+            <div class="row px-5 py-3">
+                <div class="card p-0">
+                    <div class="card-header text-light" style="background-color: black;">
+                        <div class="row">
+                            <div class="col">
+                                <h3 class="m-0 py-2">Personal Details</h3>
+                            </div>
+                            <div class="col d-flex justify-content-end">
+                                <button class="btn btn-dark btn-lg" type="submit">Edit</button><br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ user.first_name }}</p>
+                        <p class="card-text">{{ user.last_name }}</p>
+                        <p class="card-text">{{ user.email }}</p>
+                        <p class="card-text">{{ user.profile.phone }}</p>
+                        <p class="card-text">{{ user.profile.birth_date }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row px-5 py-3">
+                <div class="card p-0">
+                    <div class="card-header text-light" style="background-color: black;">
+                        <div class="row">
+                            <div class="col">
+                                <h3 class="m-0 py-2">Billing/Shipping Address</h3>
+                            </div>
+                            <div class="col d-flex justify-content-end">
+                                <button class="btn btn-dark btn-lg" type="submit">Edit</button><br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Billing Address</h5>
+                        <p class="card-text">{{ user.profile.billing_address }}</p>
+                        <h5 class="card-title fw-bold">Shipping Address</h5>
+                        <p class="card-text">{{ user.profile.shipping_address }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
