@@ -34,9 +34,9 @@
                                 {{ profile_message }}
                             </div>
                             {% endif %}
-                            {% if error %}
+                            {% if profile_error %}
                             <div class="alert alert-danger" role="alert">
-                                {{ error }}
+                                {{ profile_error }}
                             </div>
                             {% endif %}
                             <div class="form-group p-2">
@@ -114,9 +114,9 @@
                                 {{ address_message }}
                             </div>
                             {% endif %}
-                            {% if error %}
+                            {% if address_error %}
                             <div class="alert alert-danger" role="alert">
-                                {{ error }}
+                                {{ address_error }}
                             </div>
                             {% endif %}
                             <div class="form-group p-2">
