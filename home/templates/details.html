@@ -29,7 +29,7 @@
             <div class="sizeSel">S</div>&nbsp;&nbsp;<div class="sizeSel">M</div>&nbsp;&nbsp;<div class="sizeSel">L</div>&nbsp;&nbsp;<div class="sizeSel">XL</div>
         </span><br>
         <span id="productAvailability">Availability : In Stock</span> <br><br>
-        <form method="POST" action="{% url 'add_to_cart' product.id %}">
+        <form method="POST">
         {% csrf_token %}
         <button type="submit" id="btnDetailsAddToBag">ADD TO BAG</button>
         </form>

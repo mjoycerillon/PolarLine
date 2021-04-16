@@ -20,24 +20,25 @@ def shop(request):
     return render(request, 'shop.html',{'product':product})
 
 
-def details(request,product_id):
-    p = get_object_or_404(Product, id=product_id) 
-    if request.method == 'GET':
-        #print(p)
-        return render(request,'details.html', {'product': p})
+def details(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    try:
+        cart = Cart.objects.get(user=request.user.id, productId=product_id)
+    except Cart.DoesNotExist:
+        cart = None
 
-@login_required
-def add_to_cart(request,product_id):
-    p = get_object_or_404(Product, pk=product_id)
-    #print(p)
-    if request.method == 'POST':
-        cart = Cart.objects.filter(user=request.user)
-        cart_item = Cart.objects.create(user=request.user,productId=p)
-        #cart.products.add(cart_item)
-        print(cart)
-        #cart.save()
-        #cart.add_to_cart(product_id)
-    return redirect('details')
+    if request.method == 'GET':
+        return render(request, 'details.html', {'product': product})
+    else:
+        if cart is None:
+            newCart = Cart.objects.create(user=request.user, productId=product)
+            newCart.save()
+            return redirect('cart')
+        else:
+            cart_item = get_object_or_404(Cart, id=cart.id)
+            if request.method == 'POST':
+                cart_item.save()
+                return redirect('cart')
 
     
 
