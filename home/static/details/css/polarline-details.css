@@ -1,12 +1,9 @@
-main{
-    display: block;
-}
-
 .product-gallery{
     float: left;
     width: 60%;
     display: inline-flex;
 }
+
 .product-desc{
     float: left;
     width: 40%;
