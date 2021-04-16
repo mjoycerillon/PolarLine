@@ -21,6 +21,9 @@
     {% if request.get_full_path|slice:":9" == "/details/" %}
     <link rel="stylesheet" href="{% static 'details/css/polarline-details.css' %}">
     {% endif %}
+    {% if request.get_full_path == "/contactus/" %}
+    <link rel="stylesheet" href="{% static 'contactus/css/polarline-contactus.css' %}">
+    {% endif %}
 
     <!-- Plugins Stylesheets -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
