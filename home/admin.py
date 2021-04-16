@@ -1,8 +1,8 @@
 from django.contrib import admin
-from home.models import Product, Cart, Profile
+from home.models import Product, Cart, Profile, Address
 
 # Register your models here.
 admin.site.register(Product)
 admin.site.register(Cart)
 admin.site.register(Profile)
-
+admin.site.register(Address)

@@ -12,8 +12,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = PhoneField(blank=True, help_text='Contact phone number')
     birth_date = models.DateField(null=True, blank=True)
-    billing_address = models.CharField(max_length=100, blank=True)
-    shipping_address = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         """
@@ -30,6 +28,29 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
+
+
+class Address(models.Model):
+    """ This class inherits the class Model for Address table """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    billing_address = models.TextField(blank=True)
+    shipping_address = models.TextField(blank=True)
+
+    def __str__(self):
+        """
+        This method overrides the str method to return the username
+        :return: Username
+        """
+        return self.user.__str__()
+
+    @receiver(post_save, sender=User)
+    def create_user_address(sender, instance, created, **kwargs):
+        if created:
+            Address.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_address(sender, instance, **kwargs):
+        instance.address.save()
 
 
 class Product(models.Model):

@@ -27,11 +27,11 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post">
+                        <form method="POST" action="{% url 'profile' %}">
                             {% csrf_token %}
-                            {% if message %}
+                            {% if profile_message %}
                             <div class="alert alert-success" role="alert">
-                                {{ message }}
+                                {{ profile_message }}
                             </div>
                             {% endif %}
                             {% if error %}
@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit">Save changes</button>
+                            <button type="submit" id="btnSubmitProfile">Save changes</button>
                         </form>
                     </div>
                 </div>
@@ -107,10 +107,40 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title fw-bold">Billing Address</h5>
-                        <p class="card-text">{{ user.profile.billing_address }}</p>
-                        <h5 class="card-title fw-bold">Shipping Address</h5>
-                        <p class="card-text">{{ user.profile.shipping_address }}</p>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {% if address_message %}
+                            <div class="alert alert-success" role="alert">
+                                {{ address_message }}
+                            </div>
+                            {% endif %}
+                            {% if error %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error }}
+                            </div>
+                            {% endif %}
+                            <div class="form-group p-2">
+                                <div class="row">
+                                    <div class="col-md-2 p-0">
+                                        {{ address_form.billing_address.label }}
+                                    </div>
+                                    <div class="col-md-10 p-0">
+                                        {{ address_form.billing_address }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group p-2">
+                                <div class="row">
+                                    <div class="col-md-2 p-0">
+                                        {{ address_form.shipping_address.label }}
+                                    </div>
+                                    <div class="col-md-10 p-0">
+                                        {{ address_form.shipping_address }}
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" id="btnSubmitBillShipAddr">Save changes</button>
+                        </form>
                     </div>
                 </div>
             </div>
