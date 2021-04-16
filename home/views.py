@@ -125,16 +125,37 @@ def signup_user(request):
 
 
 @login_required
-@transaction.atomic
 def account(request):
+    user = User.objects.get(id=request.user.id)
 
+    return render(request, 'account.html', {
+        'user_form': user,
+        'profile_form': user.profile,
+        'address_form': user.address,
+    })
+
+
+@login_required
+def edit_profile(request):
+    user = User.objects.get(id=request.user.id)
     user_form = AccountForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
-    address_form = AddressForm(instance=request.user.address)
 
     return render(request, 'account.html', {
         'user_form': user_form,
         'profile_form': profile_form,
+        'address_form': user.address,
+    })
+
+
+@login_required
+def edit_address(request):
+    user = User.objects.get(id=request.user.id)
+    address_form = AddressForm(instance=request.user.address)
+
+    return render(request, 'account.html', {
+        'user_form': user,
+        'profile_form': user.profile,
         'address_form': address_form,
     })
 
@@ -150,10 +171,11 @@ def profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+            user = User.objects.get(id=request.user.id)
             return render(request, 'account.html', {
-                'user_form': user_form,
-                'profile_form': profile_form,
-                'address_form': address_form,
+                'user_form': user,
+                'profile_form': user.profile,
+                'address_form': user.address,
                 'profile_message': 'Your profile was successfully updated!'
             })
         else:
@@ -185,10 +207,11 @@ def address(request):
 
         if address_form.is_valid():
             address_form.save()
+            user = User.objects.get(id=request.user.id)
             return render(request, 'account.html', {
-                'user_form': user_form,
-                'profile_form': profile_form,
-                'address_form': address_form,
+                'user_form': user,
+                'profile_form': user.profile,
+                'address_form': user.address,
                 'address_message': 'Your address was successfully updated!'
             })
         else:
