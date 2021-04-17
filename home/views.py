@@ -18,13 +18,16 @@ def home(request):
 
 
 def shop(request):
-    '''
+    """
         shop():
              method takes on any request to shop.html from the index page or navigation bar
              to display all the available products in the db
 
-             @Parameter: None
-    '''
+             :param: request
+
+             :return: render response
+    """
+    
     product = Product.objects.all() #getting all Product objects
     return render(request, 'shop.html',{'product':product}) 
 
