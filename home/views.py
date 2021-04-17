@@ -3,12 +3,14 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from django.core.mail import send_mail, BadHeaderError
 from django.db import IntegrityError, transaction
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
-from home.forms import UserForm, ProfileForm, AccountForm, AddressForm
-from home.models import Cart, Product, Profile
+from .forms import UserForm, ProfileForm, AccountForm, AddressForm, ContactForm
+from .models import Cart, Product, Profile
 
 
 def home(request):
@@ -41,10 +43,26 @@ def details(request, product_id):
                 cart_item.save()
                 return redirect('cart')
 
-    
 
-def contactus(request):
-    return render(request, 'contactus.html')
+def contact_us(request):
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email, ['admin@example.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('success')
+    return render(request, "contactus.html", {'form': form})
+
+
+def contact_success(request):
+    return HttpResponse('Success! Thank you for your message.')
 
 
 @login_required

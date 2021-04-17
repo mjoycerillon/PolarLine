@@ -25,6 +25,10 @@ SECRET_KEY = 't$ci3(xw1xn9u2j$nv&k8mx1$n(i^bvd+y5!4_=0ecxx205&=8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+DEFAULT_FROM_EMAIL = 'prasadpenchala222@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 ALLOWED_HOSTS = []
 
 
