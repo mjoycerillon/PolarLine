@@ -28,8 +28,10 @@ def shop(request):
     :param request: HTTP Request - Main Page
     :return: HTTP Response - shop.html
     """
-    product = Product.objects.all() #getting all Product objects
-    return render(request, 'shop.html',{'product':product}) 
+    # Retrieve all the products from the Product table
+    product = Product.objects.all()
+    # Render the Shop Page passing all the products
+    return render(request, 'shop.html', {'product': product})
 
 
 def details(request, product_id):
@@ -42,19 +44,19 @@ def details(request, product_id):
     """
     product = get_object_or_404(Product, id=product_id)
     try:
-        cart = Cart.objects.get(user=request.user.id, productId=product_id) #retrieving cart objects belonging to current user
+        cart = Cart.objects.get(user=request.user.id, productId=product_id)
     except Cart.DoesNotExist:
-        cart = None #no such cart belonging to current user exista
+        cart = None
 
     if request.method == 'GET':
         return render(request, 'details.html', {'product': product})
     else:
         if cart is None:
-            newCart = Cart.objects.create(user=request.user, productId=product) #create a new cart object
-            newCart.save() #adding newly created object to db
+            newCart = Cart.objects.create(user=request.user, productId=product)
+            newCart.save()
             return redirect('cart')
         else:
-            cart_item = get_object_or_404(Cart, id=cart.id) #cart object already exists 
+            cart_item = get_object_or_404(Cart, id=cart.id)
             if request.method == 'POST':
                 cart_item.quantity += 1
                 cart_item.save() 
@@ -71,7 +73,7 @@ def contact_us(request):
             from_email = form.cleaned_data['from_email']
             message = form.cleaned_data['message']
             try:
-                send_mail(subject, message, from_email, ['admin@example.com'])
+                send_mail(subject, message, from_email, ['admin@polarline.com'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('success')
@@ -90,7 +92,10 @@ def logout_user(request):
     :return: HTTP Response to log out the current user and
     redirect to home page
     """
+    # Validate if the request's method is POST
     if request.method == 'POST':
+        # Calling the Django logout method passing the current session and
+        # the user object then redirect the current user to home page
         logout(request)
         return redirect('home')
 
@@ -102,49 +107,102 @@ def login_user(request):
     :return: HTTP Response to render the login page if an error occurs
     else redirect to home page
     """
+    # Validate if the request's method is POST
     if request.method == 'POST':
+        # Call the Django authenticate method to retrieve the user object based on the
+        # username and password submitted by the user
         user = authenticate(request, username=request.POST['username']
                             , password=request.POST['password'])
+        # Validate if user is not found
         if user is None:
+            # Render the login page, passing the authentication form and the error message
             return render(request,
                           'login.html',
                           {'form': AuthenticationForm(),
                            'error': 'Username or password you entered is incorrect.'})
         else:
+            # Calling the Django login method passing the current session and
+            # the user object then redirect the current user to home page
             login(request, user)
             return redirect('home')
     else:
+        # Render the login page passing the Authentication form
         return render(request, 'login.html', {'form': AuthenticationForm()})
 
 
 def cart(request):
+    """
+    This method/view will get all of the cart items
+    that is related to the current user
+    :param request: HTTP GET Request to view Cart page
+    :return: HTTP Response to render the Cart page passing
+    all of the cart items related to current user
+    """
+    userCart = None
+    # Validate if the user is logged on
     if request.user.is_authenticated:
-        cart = Cart.objects.filter(user=request.user)
+        # Retrieve all the carts related to user
+        userCart = Cart.objects.filter(user=request.user)
     else:
-        cart = []
+        # Set to an empty cart
+        userCart = []
+
+    # Validate if the request's method is GET
     if request.method == 'GET':
-        return render(request, 'cart.html', {'cart': cart})
+        # Render the Cart page passing the list of cart items
+        return render(request, 'cart.html', {'cart': userCart})
 
 
 def remove_item(request, cart_id):
+    """
+    This method/view will remove a specific item from the cart
+    :param request: HTTP Request containing the current session
+    :param cart_id: Cart ID
+    :return: HTTP Response redirecting to the Cart Page
+    """
+    # Retrieve the cart item from Cart table
     cart_item = get_object_or_404(Cart, id=cart_id)
+    # Validate if the request's method is POST
     if request.method == 'POST':
+        # Delete the cart object from the Cart Table
+        # and redirect the user to cart page
         cart_item.delete()
         return redirect('cart')
 
 
 def increment_item(request, cart_id):
+    """
+    This method/view will increment the quantity of a specific item in the cart
+    :param request: HTTP Request containing the current session
+    :param cart_id: Cart ID
+    :return: HTTP Response redirecting to the Cart Page
+    """
+    # Retrieve the cart item from Cart table
     cart_item = get_object_or_404(Cart, id=cart_id)
+    # Validate if the request's method is POST
     if request.method == 'POST':
+        # Increment the quantity and save the changes to the object
+        # then redirect the user to cart page
         cart_item.quantity += 1
         cart_item.save()
         return redirect('cart')
 
 
 def decrement_item(request, cart_id):
+    """
+    This method/view will decrement the quantity of a specific item in the cart
+    :param request: HTTP Request containing the current session
+    :param cart_id: Cart ID
+    :return: HTTP Response redirecting to the Cart Page
+    """
+    # Retrieve the cart item from Cart table
     cart_item = get_object_or_404(Cart, id=cart_id)
+    # Validate if the request's method is POST
     if request.method == 'POST':
+        # Validate if the current quantity is greater than zero
         if cart_item.quantity > 0:
+            # Decrement the quantity and save the changes to the object
+            # then redirect the user to cart page
             cart_item.quantity -= 1
             cart_item.save()
         return redirect('cart')
