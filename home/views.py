@@ -14,19 +14,25 @@ from .models import Cart, Product, Profile
 
 
 def home(request):
+    """
+    This view will handle the rendering of Home Page
+    :param request: HTTP Request - Main Page
+    :return: HTTP Response - index.html
+    """
     return render(request, 'index.html')
 
 
 def shop(request):
-    '''
-        shop():
-             method takes on any request to shop.html from the index page or navigation bar
-             to display all the available products in the db
+    """
+    This method takes on any request to shop.html from the index page or navigation bar
+    to display all the available products from the Product Table
+    :param request: HTTP Request
+    :return: HTTP Response
+    """
 
-             @Parameter: None
-    '''
-    product = Product.objects.all() #getting all Product objects
-    return render(request, 'shop.html',{'product':product}) 
+    # Retrieve all the Product objects
+    product = Product.objects.all()
+    return render(request, 'shop.html', {'product': product})
 
 
 def details(request, product_id):
