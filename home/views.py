@@ -166,6 +166,7 @@ def cart(request):
         return render(request, 'cart.html', {'cart': userCart})
 
 
+@login_required
 def remove_item(request, cart_id):
     """
     This method/view will remove a specific item from the cart
@@ -185,6 +186,7 @@ def remove_item(request, cart_id):
         return redirect('cart')
 
 
+@login_required
 def increment_item(request, cart_id):
     """
     This method/view will increment the quantity of a specific item in the cart
@@ -205,6 +207,7 @@ def increment_item(request, cart_id):
         return redirect('cart')
 
 
+@login_required
 def decrement_item(request, cart_id):
     """
     This method/view will decrement the quantity of a specific item in the cart
@@ -268,7 +271,6 @@ def signup_user(request):
     else:
         # Render the sign up page
         return render(request, 'signup.html', {'form': UserForm()})
-
 
 
 @login_required

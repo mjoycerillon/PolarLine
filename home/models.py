@@ -74,7 +74,7 @@ class Product(models.Model):
         This method will get the absolute url for the product details page
         :return: Slug
         """
-        return reverse('details', kwargs={'productSlug': self.productSlug})
+        return reverse('details', kwargs={'slug': self.productSlug})
 
 
 class Cart(models.Model):
@@ -95,5 +95,3 @@ class Cart(models.Model):
         :return:
         """
         return f'{self.user} | {self.productId.__str__()} | {self.quantity}'
-
-

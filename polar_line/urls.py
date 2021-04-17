@@ -51,8 +51,8 @@ urlpatterns = [
     path('contact/', views.contact_us, name='contactus'),
 
 ]
-
+# Adding STATIC to URL Patterns
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Adding MEDIA to URL Patterns
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-
