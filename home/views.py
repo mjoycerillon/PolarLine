@@ -18,29 +18,45 @@ def home(request):
 
 
 def shop(request):
-    product = Product.objects.all()
-    return render(request, 'shop.html',{'product':product})
+    '''
+        shop():
+             method takes on any request to shop.html from the index page or navigation bar
+             to display all the available products in the db
+
+             @Parameter: None
+    '''
+    product = Product.objects.all() #getting all Product objects
+    return render(request, 'shop.html',{'product':product}) 
 
 
 def details(request, product_id):
+    '''
+        details():
+             method takes on any request to details.html from the shop page
+             to display the product details
+
+             @Parameter: product_id (Unique Identifier of Product Model Table in sqlite db)
+             used to retrieve the details of product from the Product Table.
+    '''
+
     product = get_object_or_404(Product, id=product_id)
     try:
-        cart = Cart.objects.get(user=request.user.id, productId=product_id)
+        cart = Cart.objects.get(user=request.user.id, productId=product_id) #retrieving cart objects belonging to current user
     except Cart.DoesNotExist:
-        cart = None
+        cart = None #no such cart belonging to current user exista
 
     if request.method == 'GET':
         return render(request, 'details.html', {'product': product})
     else:
         if cart is None:
-            newCart = Cart.objects.create(user=request.user, productId=product)
-            newCart.save()
+            newCart = Cart.objects.create(user=request.user, productId=product) #create a new cart object
+            newCart.save() #adding newly created object to db
             return redirect('cart')
         else:
-            cart_item = get_object_or_404(Cart, id=cart.id)
+            cart_item = get_object_or_404(Cart, id=cart.id) #cart object already exists 
             if request.method == 'POST':
                 cart_item.quantity += 1
-                cart_item.save()
+                cart_item.save() 
                 return redirect('cart')
 
 
