@@ -21,7 +21,7 @@
     {% if request.get_full_path|slice:":9" == "/details/" %}
     <link rel="stylesheet" href="{% static 'details/css/polarline-details.css' %}">
     {% endif %}
-    {% if request.get_full_path == "/contactus/" %}
+    {% if request.get_full_path == "/contact/" %}
     <link rel="stylesheet" href="{% static 'contactus/css/polarline-contactus.css' %}">
     {% endif %}
 

@@ -14,34 +14,33 @@ from .models import Cart, Product, Profile
 
 
 def home(request):
+    """
+    This view will handle the rendering of Home Page
+    :param request: HTTP Request - Main Page
+    :return: HTTP Response - index.html
+    """
     return render(request, 'index.html')
 
 
 def shop(request):
     """
-        shop():
-             method takes on any request to shop.html from the index page or navigation bar
-             to display all the available products in the db
-
-             :param: request
-
-             :return: render response
+    This view will handle the rendering of shop page
+    to display all the available products in the db
+    :param request: HTTP Request - Main Page
+    :return: HTTP Response - shop.html
     """
-    
     product = Product.objects.all() #getting all Product objects
     return render(request, 'shop.html',{'product':product}) 
 
 
 def details(request, product_id):
-    '''
-        details():
-             method takes on any request to details.html from the shop page
-             to display the product details
-
-             @Parameter: product_id (Unique Identifier of Product Model Table in sqlite db)
-             used to retrieve the details of product from the Product Table.
-    '''
-
+    """
+    This view will handle the rendering of details page
+    to display the details of a product
+    :param request: HTTP Request - Shop Page
+    :param product_id: Unique Identifier of each product in Product Model Table in sqlite db
+    :return: HTTP Response - details.html
+    """
     product = get_object_or_404(Product, id=product_id)
     try:
         cart = Cart.objects.get(user=request.user.id, productId=product_id) #retrieving cart objects belonging to current user
