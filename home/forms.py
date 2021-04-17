@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 
-from home.models import Profile, Address
+from .models import Profile, Address
 
 
 class UserForm(UserCreationForm):
@@ -27,3 +27,11 @@ class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
         fields = ('shipping_address', 'billing_address')
+
+
+class ContactForm(forms.Form):
+    from_email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Enter your email'}))
+    subject = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'What\'s this about?'}))
+    message = forms.CharField(required=True, widget=forms.Textarea(attrs={'placeholder': 'Go ahead we\'re listening...'}))
+
+
