@@ -271,9 +271,18 @@ def signup_user(request):
         return render(request, 'signup.html', {'form': UserForm()})
 
 
+
 @login_required
 def account(request):
+    """
+    This method/will return a view of the current user's account details
+    :param request: HTTP Request to render the account page
+    :return: HTTP Response to render account profile and address specific for the user
+    """
+    # Retrieve the User Object
     user = User.objects.get(id=request.user.id)
+
+    # Render the Account Page the user's details, profile and address
     return render(request, 'account.html', {
         'user_form': user,
         'profile_form': user.profile,
