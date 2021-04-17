@@ -151,6 +151,12 @@ def decrement_item(request, cart_id):
 
 
 def signup_user(request):
+    """
+    This method/view will let a user sign in i.e create an account to Polar Line
+    :param request: HTTP Request to view signin page
+    :return: HTTP Response to render the signin page if an error occurs
+    else redirect to home page
+    """
     if request.method == 'POST':
         # Create a new user
         if request.POST['password1'] == request.POST['password2']:
