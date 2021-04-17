@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -10,7 +9,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
 from .forms import UserForm, ProfileForm, AccountForm, AddressForm, ContactForm
-from .models import Cart, Product, Profile
+from .models import Cart, Product
 
 
 def home(request):
@@ -85,12 +84,24 @@ def contact_success(request):
 
 @login_required
 def logout_user(request):
+    """
+    This method/view will log out the current user
+    :param request: HTTP Request - current session
+    :return: HTTP Response to log out the current user and
+    redirect to home page
+    """
     if request.method == 'POST':
         logout(request)
         return redirect('home')
 
 
 def login_user(request):
+    """
+    This method/view will let a user log in to Polar Line
+    :param request: HTTP Request to view login the login page
+    :return: HTTP Response to render the login page if an error occurs
+    else redirect to home page
+    """
     if request.method == 'POST':
         user = authenticate(request, username=request.POST['username']
                             , password=request.POST['password'])
