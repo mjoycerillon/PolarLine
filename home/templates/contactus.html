@@ -19,13 +19,23 @@
         </div>
         <div class="container m-auto">
             <div class="row d-flex justify-content-center">
-                <div class="card p-0" style="max-width: 600px;">
-                    <div class="card-header d-flex justify-content-center text-white bg-dark py-2">
-                      <h3 class="m-0">SEND US A MESSAGE</h3>
+                <div class="card p-0 rounded" style="max-width: 600px;">
+                    <div class="card-header d-flex justify-content-center text-white bg-dark py-3">
+                      <h4 class="m-0">SEND US A MESSAGE</h4>
                     </div>
                     <div class="card-body">
                         <form id="contactForm" method="POST">
                             {% csrf_token %}
+                            {% if success %}
+                            <div class="alert alert-success" role="alert">
+                                {{ success }}
+                            </div>
+                            {% endif %}
+                            {% if error %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error }}
+                            </div>
+                            {% endif %}
                             <div class="form-group">
                                 <div class="row py-2">
                                     <div class="row d-flex justify-content-center w-75 m-auto">{{ form.from_email }}</div>

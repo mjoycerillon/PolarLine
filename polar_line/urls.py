@@ -21,6 +21,7 @@ from django.urls import path
 from home import views
 
 urlpatterns = [
+    # Admin and Home URLs
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
 
@@ -29,25 +30,26 @@ urlpatterns = [
     path('logout/', views.logout_user, name='logout_user'),
     path('signup/', views.signup_user, name='signup_user'),
 
-    # Polar Line Pages
+    # Account URLs
     path('account/', views.account, name='account'),
     path('account/profile', views.profile, name='profile'),
     path('account/profile/edit', views.edit_profile, name='edit_profile'),
     path('account/address', views.address, name='address'),
     path('account/address/edit', views.edit_address, name='edit_address'),
 
+    # Shop URLs
     path('shop/', views.shop, name='shop'),
+    path('details/<int:product_id>', views.details, name='details'),
 
+    # Cart URLs
     path('cart/', views.cart, name='cart'),
     path('cart/<int:cart_id>/remove', views.remove_item, name='remove_item'),
     path('cart/<int:cart_id>/increment', views.increment_item, name='increment_item'),
     path('cart/<int:cart_id>/decrement', views.decrement_item, name='decrement_item'),
 
-    # Test poc
+    # Contact Us URLs
     path('contact/', views.contact_us, name='contactus'),
-    path('success/', views.contact_success, name='success'),
 
-    path('details/<int:product_id>', views.details, name='details'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

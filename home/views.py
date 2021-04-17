@@ -4,7 +4,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail, BadHeaderError
 from django.db import IntegrityError, transaction
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
@@ -85,13 +84,13 @@ def contact_us(request):
             try:
                 send_mail(subject, message, from_email, ['admin@polarline.com'])
             except BadHeaderError:
-                return HttpResponse('Invalid header found.')
-            return redirect('success')
+                return render(request, "contactus.html",
+                              {'form': form,
+                               'error': 'Invalid header found.'})
+            return render(request, "contactus.html", {'form': form,
+                                                      'success': 'Success! Thank you for your message.'})
+
     return render(request, "contactus.html", {'form': form})
-
-
-def contact_success(request):
-    return HttpResponse('Success! Thank you for your message.')
 
 
 @login_required
