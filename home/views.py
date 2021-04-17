@@ -1,6 +1,6 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail, BadHeaderError
 from django.db import IntegrityError, transaction
@@ -18,6 +18,7 @@ def home(request):
     :param request: HTTP Request - Main Page
     :return: HTTP Response - index.html
     """
+    # Render Home page
     return render(request, 'index.html')
 
 
@@ -30,6 +31,7 @@ def shop(request):
     """
     # Retrieve all the products from the Product table
     product = Product.objects.all()
+
     # Render the Shop Page passing all the products
     return render(request, 'shop.html', {'product': product})
 
@@ -42,25 +44,33 @@ def details(request, product_id):
     :param product_id: Unique Identifier of each product in Product Model Table in sqlite db
     :return: HTTP Response - details.html
     """
+    # Retrieve the product from Product table
     product = get_object_or_404(Product, id=product_id)
-    try:
-        cart = Cart.objects.get(user=request.user.id, productId=product_id)
-    except Cart.DoesNotExist:
-        cart = None
 
+    # Validate if the request's method is GET
     if request.method == 'GET':
+
+        # Render details page passing the product details
         return render(request, 'details.html', {'product': product})
     else:
-        if cart is None:
-            newCart = Cart.objects.create(user=request.user, productId=product)
-            newCart.save()
+        try:
+            # Retrieve the cart object passing it's composite keys user and product
+            cart_item = Cart.objects.get(user=request.user.id, productId=product_id)
+
+        except Cart.DoesNotExist:
+            # If the product is not in the user's cart,
+            # create a new row to add the product to user's cart
+            new_cart = Cart.objects.create(user=request.user, productId=product)
+            new_cart.save()
+
+            # Redirect the user to cart page
             return redirect('cart')
-        else:
-            cart_item = get_object_or_404(Cart, id=cart.id)
-            if request.method == 'POST':
-                cart_item.quantity += 1
-                cart_item.save() 
-                return redirect('cart')
+
+        # Increment the item's quantity and save to
+        # database then redirect the user to cart page
+        cart_item.quantity += 1
+        cart_item.save()
+        return redirect('cart')
 
 
 def contact_us(request):
@@ -94,6 +104,7 @@ def logout_user(request):
     """
     # Validate if the request's method is POST
     if request.method == 'POST':
+
         # Calling the Django logout method passing the current session and
         # the user object then redirect the current user to home page
         logout(request)
@@ -109,12 +120,14 @@ def login_user(request):
     """
     # Validate if the request's method is POST
     if request.method == 'POST':
+
         # Call the Django authenticate method to retrieve the user object based on the
         # username and password submitted by the user
-        user = authenticate(request, username=request.POST['username']
-                            , password=request.POST['password'])
+        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+
         # Validate if user is not found
         if user is None:
+
             # Render the login page, passing the authentication form and the error message
             return render(request,
                           'login.html',
@@ -138,9 +151,9 @@ def cart(request):
     :return: HTTP Response to render the Cart page passing
     all of the cart items related to current user
     """
-    userCart = None
     # Validate if the user is logged on
     if request.user.is_authenticated:
+
         # Retrieve all the carts related to user
         userCart = Cart.objects.filter(user=request.user)
     else:
@@ -149,6 +162,7 @@ def cart(request):
 
     # Validate if the request's method is GET
     if request.method == 'GET':
+
         # Render the Cart page passing the list of cart items
         return render(request, 'cart.html', {'cart': userCart})
 
@@ -162,8 +176,10 @@ def remove_item(request, cart_id):
     """
     # Retrieve the cart item from Cart table
     cart_item = get_object_or_404(Cart, id=cart_id)
+
     # Validate if the request's method is POST
     if request.method == 'POST':
+
         # Delete the cart object from the Cart Table
         # and redirect the user to cart page
         cart_item.delete()
@@ -179,8 +195,10 @@ def increment_item(request, cart_id):
     """
     # Retrieve the cart item from Cart table
     cart_item = get_object_or_404(Cart, id=cart_id)
+
     # Validate if the request's method is POST
     if request.method == 'POST':
+
         # Increment the quantity and save the changes to the object
         # then redirect the user to cart page
         cart_item.quantity += 1
@@ -197,14 +215,18 @@ def decrement_item(request, cart_id):
     """
     # Retrieve the cart item from Cart table
     cart_item = get_object_or_404(Cart, id=cart_id)
+
     # Validate if the request's method is POST
     if request.method == 'POST':
+
         # Validate if the current quantity is greater than zero
         if cart_item.quantity > 0:
+
             # Decrement the quantity and save the changes to the object
             # then redirect the user to cart page
             cart_item.quantity -= 1
             cart_item.save()
+
         return redirect('cart')
 
 
@@ -215,32 +237,43 @@ def signup_user(request):
     :return: HTTP Response to render the signup page if an error occurs
     else redirect to home page
     """
+    # Validate if the request's method is POST
     if request.method == 'POST':
-        # Create a new user
+
+        # Validate if password and confirm password fields are the same
         if request.POST['password1'] == request.POST['password2']:
+
             try:
+                # Create the User object with all the details from request and save/commit to database
                 user = User.objects.create_user(request.POST['username'],
                                                 password=request.POST['password1'],
                                                 email=request.POST['email'],
                                                 first_name=request.POST['first_name'],
                                                 last_name=request.POST['last_name'])
                 user.save()
+
+                # Calling the Django login method passing the current session and
+                # the user object then redirect the current user to home page
                 login(request, user)
                 return redirect('home')
+
+            # If a certain username has already been taken (Integrity Error),
+            # return with HTTP Response that will render the sign up page passing the error message
             except IntegrityError:
                 return render(request, 'signup.html',
-                              {'form': UserCreationForm(), 'error': 'Username has already been taken'})
+                              {'form': UserForm(),
+                               'error': 'Username has already been taken'})
         else:
-            # Password didn't match
+            # Render the sign up page passing the error message
             return render(request, 'signup.html', {'form': UserForm(), 'error': 'Passwords did not match'})
     else:
+        # Render the sign up page
         return render(request, 'signup.html', {'form': UserForm()})
 
 
 @login_required
 def account(request):
     user = User.objects.get(id=request.user.id)
-
     return render(request, 'account.html', {
         'user_form': user,
         'profile_form': user.profile,
@@ -250,10 +283,19 @@ def account(request):
 
 @login_required
 def edit_profile(request):
+    """
+    This method/view will enable the edit profile for the user
+    :param request: HTTP Request enabling the account and profile form
+    :return: HTTP Response rendering the Account page
+    """
+    # Retrieving the user Object
     user = User.objects.get(id=request.user.id)
+
+    # Calling the account form and profile form passing user object as instance
     user_form = AccountForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
 
+    # Render the account page passing the user and profile forms and passing user's address
     return render(request, 'account.html', {
         'user_form': user_form,
         'profile_form': profile_form,
@@ -263,9 +305,18 @@ def edit_profile(request):
 
 @login_required
 def edit_address(request):
+    """
+    This method/view will enable the edit address for the user
+    :param request: HTTP Request enabling the address form
+    :return: HTTP Response rendering the Account page
+    """
+    # Retrieving the User Object
     user = User.objects.get(id=request.user.id)
+
+    # Calling the address form passing User object as instance
     address_form = AddressForm(instance=request.user.address)
 
+    # Render the account page passing the user's profile details and the address form
     return render(request, 'account.html', {
         'user_form': user,
         'profile_form': user.profile,
@@ -276,14 +327,30 @@ def edit_address(request):
 @login_required
 @transaction.atomic
 def profile(request):
+    """
+    This method/view will process the account and profile forms submitted by the user
+    :param request: HTTP Request containing the details for Account and Profile forms
+    :return: HTTP Response rendering the page passing an informational message for the user
+    if the details has been updated or an error occurs.
+    """
+    # Validate if the request's method is POST
     if request.method == 'POST':
+
+        # Calling the account form and profile form passing the details from POST
         user_form = AccountForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
+
+        # Calling the address form passing user object as instance
         address_form = AddressForm(instance=request.user.address)
 
+        # Validate if the forms are valid
         if user_form.is_valid() and profile_form.is_valid():
+            # Save/Commit the forms to database
             user_form.save()
             profile_form.save()
+
+            # Retrieving the updated User object and render the account page
+            # with newly updated User Details
             user = User.objects.get(id=request.user.id)
             return render(request, 'account.html', {
                 'user_form': user,
@@ -292,34 +359,45 @@ def profile(request):
                 'profile_message': 'Your profile was successfully updated!'
             })
         else:
+            # Render the account page passing all the forms and the error message
             return render(request, 'account.html', {
                 'user_form': user_form,
                 'profile_form': profile_form,
                 'address_form': address_form,
-                'profile_error': 'Error occurred while submitting the form. '
+                'profile_error': 'Error occurred while submitting the form.'
             })
     else:
-        user_form = AccountForm(instance=request.user)
-        profile_form = ProfileForm(instance=request.user.profile)
-        address_form = AddressForm(instance=request.user.address)
-
-    return render(request, 'account.html', {
-        'user_form': user_form,
-        'profile_form': profile_form,
-        'address_form': address_form,
-    })
+        # Redirecting to account page
+        return redirect('account')
 
 
 @login_required
 @transaction.atomic
 def address(request):
+    """
+    This method/view will process the address form submitted by the user
+    :param request: HTTP Request containing the details for Address form
+    :return: HTTP Response rendering the page passing an informational message for the user
+    if the address has been updated or an error occurs.
+    """
+    # Validate if the request's method is POST
     if request.method == 'POST':
+
+        # Calling the account form and Profile form passing user object as instance
         user_form = AccountForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
+
+        # Calling the address form passing the details from POST
         address_form = AddressForm(request.POST, instance=request.user.address)
 
+        # Validate if address form is valid
         if address_form.is_valid():
+
+            # Save/Commit the forms to database
             address_form.save()
+
+            # Retrieving the updated user object and render the account page
+            # with newly updated user address
             user = User.objects.get(id=request.user.id)
             return render(request, 'account.html', {
                 'user_form': user,
@@ -328,6 +406,7 @@ def address(request):
                 'address_message': 'Your address was successfully updated!'
             })
         else:
+            # Render the account page passing all the forms and the error message
             return render(request, 'account.html', {
                 'user_form': user_form,
                 'profile_form': profile_form,
@@ -336,12 +415,5 @@ def address(request):
 
             })
     else:
-        user_form = AccountForm(instance=request.user)
-        profile_form = ProfileForm(instance=request.user.profile)
-        address_form = AddressForm(instance=request.user.address)
-
-    return render(request, 'account.html', {
-        'user_form': user_form,
-        'profile_form': profile_form,
-        'address_form': address_form,
-    })
+        # Redirecting to account page
+        return redirect('account')
