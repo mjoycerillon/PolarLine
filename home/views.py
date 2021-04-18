@@ -73,6 +73,14 @@ def details(request, product_id):
 
 
 def contact_us(request):
+    """
+        This view will handle the rendering of Contact us Page
+        where contact information is displayed and a form is
+        available to write their queries through email
+        :param request: HTTP Request - Contactus Page
+        :return: HTTP Response - contactus.html
+        """
+    # Render Contact us page
     if request.method == 'GET':
         form = ContactForm()
     else:
