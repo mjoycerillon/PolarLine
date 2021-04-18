@@ -23,13 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 't$ci3(xw1xn9u2j$nv&k8mx1$n(i^bvd+y5!4_=0ecxx205&=8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 DEFAULT_FROM_EMAIL = 'prasadpenchala222@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-ALLOWED_HOSTS = ['polarline.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -128,9 +128,3 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-
-try:
-    from .local_settings import *
-except ImportError:
-    print("No local file allowed in production.")
