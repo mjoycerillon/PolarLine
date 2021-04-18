@@ -10,6 +10,14 @@ $(function() {
 
     // Upon hover on Shop, a sub-menu should be displayed on the screen.
     $('#navShop').hover(function() {
-        $(this).children('div').stop(true, false, true).slideToggle(400);
+        if (!$('.burger-container').is(":visible")) {
+            $(this).children('div').stop(true, false, true).slideToggle(400);
+        }
+    });
+
+    $('.burger-container').on('click', function() {
+        $('.nav-links-grp').children('ul').toggle('slide', {
+            direction: 'left'
+        }, 1000);
     });
 });

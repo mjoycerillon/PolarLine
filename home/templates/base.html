@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Polar Line">
+    <link rel="icon" href="{% static 'home/images/polarline-logo.png' %}" type="image/gif" sizes="32x32">
 
     <title>{% block title %}PolarLine | Home{% endblock %}</title>
     <!-- Custom Stylesheets -->
@@ -53,11 +54,20 @@
 
 </head>
 <body>
-    <div id="polarline-head" class="d-flex justify-content-center">
-        <a href="{% url 'home' %}" class="d-flex align-items-center">
-            <span class="logo-polar">polar</span>
-            <span class="logo-line">line.</span>
-        </a>
+    <div id="polarline-head" class="d-flex">
+        <div class="burger-container d-flex align-items-center justify-content-end">
+            <label class="burger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </label>
+        </div>
+        <div class="polarline-logo d-flex justify-content-center">
+            <a href="{% url 'home' %}" class="d-flex align-items-center">
+                <span class="logo-polar">polar</span>
+                <span class="logo-line">line.</span>
+            </a>
+        </div>
     </div>
     <nav>
         <div class="filler"></div>
@@ -105,6 +115,7 @@
                     </div>
                 </li>
                 <li><a href="{% url 'contactus' %}">CONTACT US</a></li>
+                <li><a class="navAccountLinkMob" href="{% url 'login_user' %}">Sign in/Register</a></li>
             </ul>
         </div>
         <div id="nav-icons">
@@ -137,43 +148,67 @@
         </div>
     </nav>
     {% block content %} {% endblock %}
-    <footer class="d-flex">
+        <footer class="d-flex">
         <div class="container">
-            <div class="row p-5">
-              <div class="col-4">
-                <div id="footer-logo">
-                    <span class="logo-polar">polar</span><span class="logo-line">line.</span>
+            <div class="row py-5">
+                <div class="p-0 col-md-5 col-sm-12 col-xs-12">
+                    <div class="col-sm-12">
+                        <div class="p-0 col-xs-12 col-sm-12 col-md-12">
+                            <div class="col px-5">
+                                <div id="footer-logo">
+                                    <span class="logo-polar">polar</span><span class="logo-line">line.</span>
+                                </div>
+                                <div id="footer-about-us">
+                                    Beyond helping you look your best, PolarLine strives to get you the perfect clothing you've
+                                    been looking for
+                                    from local and international brands. We at PolarLine want to give you the perfect wardrobe
+                                    you've been looking
+                                    for. Be fashionable even in winter.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-0 col-xs-12 col-sm-12 col-md-12">
+                            <div class="col px-5 find-us-1">
+                                <div class="footer-find-us">FIND US ON</div>
+                                <div class="footer-social-media">
+                                    <img src="{% static '/home/images/facebook.png' %}" alt="Facebook Icon" height="35">
+                                    <img src="{% static '/home/images/pinterest.png' %}" alt="Pinterest Icon" height="35">
+                                    <img src="{% static '/home/images/instagram.png' %}" alt="Instagram Icon" height="35">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="footer-about-us">
-                    Beyond helping you look your best, PolarLine strives to get you the perfect clothing you've been looking for
-                    from local and international brands. We at PolarLine want to give you the perfect wardrobe you've been looking
-                    for. Be fashionable even in winter.
+                <div class="p-0 m-0 col-md-2 col-sm-6 col-6">
+                    <div class="explore">
+                        <div class="footer-col-header">EXPLORE</div>
+                        <div>About us</div>
+                        <div>FAQS</div>
+                        <div>Privacy Policy</div>
+                        <div>Returns Policy</div>
+                    </div>
+                    <div class="col p-5 find-us-2">
+                        <div class="footer-find-us fw-bold">FIND US ON</div>
+                        <div class="footer-social-media">
+                            <img src="{% static '/home/images/facebook.png' %}" alt="Facebook Icon" height="35">
+                            <img src="{% static '/home/images/pinterest.png' %}" alt="Pinterest Icon" height="35">
+                            <img src="{% static '/home/images/instagram.png' %}" alt="Instagram Icon" height="35">
+                        </div>
+                    </div>
                 </div>
-                <div id="footer-find-us">FIND US ON</div>
-                <div id="footer-social-media">
-                    <img src="{% static '/home/images/facebook.png' %}" alt="Facebook Icon" height="35">
-                    <img src="{% static '/home/images/pinterest.png' %}" alt="Pinterest Icon" height="35">
-                    <img src="{% static '/home/images/instagram.png' %}" alt="Instagram Icon" height="35">
-                </div>
-              </div>
-              <div class="col footer-col-2">
-                <div class="footer-col-header">EXPLORE</div>
-                <div>About us</div>
-                <div>FAQS</div>
-                <div>Privacy Policy</div>
-                <div>Returns Policy</div>
-              </div>
-              <div class="col-4 p-2">
-                <div class="footer-col-header">NEW TO POLARLINE?</div>
-                <div id="footer-voucher"><b>Get a $50 VOUCHER</b> (plus the latest fashion news and products launches)
-                    just by subscribing to our newsletter.</div>
-                <form class="footer-form">
-                    <input type="email" placeholder="Email Address"><br>
-                    <button type="submit">SUBSCRIBE</button>
-                </form>
+                <div class="p-0 m-0 col-md-5 col-sm-6 col-6">
+                    <div class="col px-3">
+                        <div class="footer-col-header">NEW TO POLARLINE?</div>
+                        <div id="footer-voucher"><b>Get a $50 VOUCHER</b> (plus the latest fashion news and products
+                            launches) just by subscribing to our newsletter.</div>
+                        <form class="footer-form">
+                            <input type="email" placeholder="Email Address"><br>
+                            <button type="submit">SUBSCRIBE</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-          </div>
+        </div>
     </footer>
 </body>
 </html>
