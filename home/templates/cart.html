@@ -29,14 +29,14 @@
                                           </div>
                                           <div class="row">
                                               <div class="col"><img src="{{ item.productId.productImage.url }}" class="img-fluid img-thumbnail"></div>
-                                              <div class="col align-items-center text-center fw-bolder">{{ product.productName }}</div>
-                                              <div class="col align-items-center">
+                                              <div class="col d-flex align-items-center text-center fw-bolder">{{ product.productName }}</div>
+                                              <div class="col d-flex align-items-center">
                                                   <div class="container">
                                                       <div class="row justify-content-center">Price</div>
                                                       <div class="row justify-content-center text-danger fw-bolder cartItemPrice">${{ product.productPrice }}</div>
                                                   </div>
                                               </div>
-                                              <div class="col align-items-center">
+                                              <div class="col d-flex align-items-center">
                                                   <div class="container p-0">
                                                       <div class="row justify-content-center">Quantity</div>
                                                       <div class="row justify-content-center">
@@ -54,7 +54,7 @@
                                                       </div>
                                                   </div>
                                               </div>
-                                              <div class="col align-items-center">
+                                              <div class="col d-flex align-items-center">
                                                   <div class="container">
                                                       <div class="row justify-content-center">Total</div>
                                                       <div class="cartSubTotal row justify-content-center text-danger fw-bolder">${{ product.productPrice|mul:item.quantity|floatformat:2 }}</div>
