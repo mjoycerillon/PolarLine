@@ -10,7 +10,7 @@ $(function() {
 
     // Upon hover on Shop, a sub-menu should be displayed on the screen.
     $('#navShop').hover(function() {
-        if (!$('.burger-container').is(":visible")) {
+        if (!$('.burger').is(":visible")) {
             $(this).children('div').stop(true, false, true).slideToggle(400);
         }
     });
